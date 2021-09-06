@@ -1,0 +1,22 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.div-body{
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    color: black;
+
+    /* border: 1px solid black; */
+}
+
+.body-imagen{
+    margin: 5%;
+    height: 500px;
+    width: 80%;
+    background-image: url(./imagenes/store.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

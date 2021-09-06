@@ -1,0 +1,26 @@
+create database sport_shop;
+
+use sport_shop;
+
+CREATE TABLE categoria(
+    id_categoria int not null,
+    nombre varchar(50),
+    primary key (id_categoria)
+);
+
+CREATE TABLE producto (
+    id_producto int not null AUTO_INCREMENT,
+    nombre varchar(50),
+    precio int,
+    id_categoria int,
+    foreign key (id_categoria) references categoria (id_categoria),
+    primary key (id_producto)
+);
+
+CREATE TABLE talla (
+    id_talla varchar(50) not null,
+    id_producto int not null,
+    cantidad int,
+    foreign key (id_producto) references producto (id_producto),
+    primary key (id_talla, id_producto)
+);
