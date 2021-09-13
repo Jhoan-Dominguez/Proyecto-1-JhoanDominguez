@@ -1,6 +1,23 @@
-create database sport_shop;
+create database prontoMuebles;
 
-use sport_shop;
+use prontoMuebles;
+
+CREATE TABLE categoria(
+    
+);
+
+CREATE TABLE categoria(
+    
+);
+
+CREATE TABLE categoria(
+    
+);
+
+CREATE TABLE categoria(
+    
+);
+-------------------------------------------------------------------------------------------------
 
 CREATE TABLE categoria(
     id_categoria int not null,
