@@ -1,43 +1,44 @@
+token: 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
+------------------------------------------------------------------------------------------------
 create database prontoMuebles;
 
 use prontoMuebles;
 
-CREATE TABLE categoria(
-    
+CREATE TABLE tipoUsuario(
+    id_tipoUsuario int not null AUTO_INCREMENT UNIQUE,
+    nombreTipoU varchar(50),
+    primary key (id_tipoUsuario)
 );
 
-CREATE TABLE categoria(
-    
+CREATE TABLE usuario(
+    id_usuario int not null AUTO_INCREMENT UNIQUE,
+    correo varchar(50),
+    password varchar(50),
+    id_tipoDeUsuario int,
+    foreign key (id_tipoDeUsuario) references tipoUsuario(id_tipoUsuario),
+    primary key (id_usuario)
 );
 
-CREATE TABLE categoria(
-    
+CREATE TABLE cliente(
+    id_cliente int not null AUTO_INCREMENT UNIQUE,
+    nombre varchar(50),
+    apellido varchar(50),
+    direccion varchar(50),
+    primary key (id_cliente)
 );
 
-CREATE TABLE categoria(
+CREATE TABLE cliente_usuario(
+    id_clienteUsuario int not null AUTO_INCREMENT UNIQUE,
+    id_cliente int,
+    id_usuario int,
+    fecha_creacion date,
+    foreign key (id_cliente) references cliente(id_cliente),
+    foreign key (id_usuario) references usuario(id_usuario),
+    primary key (id_clienteUsuario, id_cliente, id_usuario)
+);
+
+CREATE TABLE (
     
 );
 -------------------------------------------------------------------------------------------------
 
-CREATE TABLE categoria(
-    id_categoria int not null,
-    nombre varchar(50),
-    primary key (id_categoria)
-);
-
-CREATE TABLE producto (
-    id_producto int not null AUTO_INCREMENT,
-    nombre varchar(50),
-    precio int,
-    id_categoria int,
-    foreign key (id_categoria) references categoria (id_categoria),
-    primary key (id_producto)
-);
-
-CREATE TABLE talla (
-    id_talla varchar(50) not null,
-    id_producto int not null,
-    cantidad int,
-    foreign key (id_producto) references producto (id_producto),
-    primary key (id_talla, id_producto)
-);
