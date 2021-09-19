@@ -1,3 +1,4 @@
+correo: jhoandominguezu@gmail.com
 token: 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
 ------------------------------------------------------------------------------------------------
 create database prontoMuebles;
@@ -6,39 +7,153 @@ use prontoMuebles;
 
 CREATE TABLE tipoUsuario(
     id_tipoUsuario int not null AUTO_INCREMENT UNIQUE,
-    nombreTipoU varchar(50),
+    nombre_tipoUsuario varchar(50),
+    nivel_tipoUsuario int,
     primary key (id_tipoUsuario)
 );
 
 CREATE TABLE usuario(
     id_usuario int not null AUTO_INCREMENT UNIQUE,
-    correo varchar(50),
-    password varchar(50),
-    id_tipoDeUsuario int,
-    foreign key (id_tipoDeUsuario) references tipoUsuario(id_tipoUsuario),
+    correo_usuario varchar(50),
+    password_usuario varchar(50),
+    estado_usuario boolean,
+    id_tipoUsuario int,
+    foreign key (id_tipoUsuario) references tipoUsuario(id_tipoUsuario),
     primary key (id_usuario)
 );
 
 CREATE TABLE cliente(
     id_cliente int not null AUTO_INCREMENT UNIQUE,
-    nombre varchar(50),
-    apellido varchar(50),
-    direccion varchar(50),
+    nombre_cliente varchar(50),
+    apellido_cliente varchar(50),
+    direccion_cliente varchar(50),
+    telefono_cliente varchar(50),
+    fechaNacimiento_cliente date,
+    id_usuario int,
+    foreign key (id_usuario) references usuario(id_usuario),
     primary key (id_cliente)
 );
 
-CREATE TABLE cliente_usuario(
-    id_clienteUsuario int not null AUTO_INCREMENT UNIQUE,
-    id_cliente int,
+CREATE TABLE domiciliario(
+    id_domiciliario int not null AUTO_INCREMENT UNIQUE,
+    nombre_domiciliario varchar(50),
+    apellido_domiciliario varchar(50),
+    codigo_domiciliario int,
+    estado_domiciliario boolean,
     id_usuario int,
-    fecha_creacion date,
-    foreign key (id_cliente) references cliente(id_cliente),
     foreign key (id_usuario) references usuario(id_usuario),
-    primary key (id_clienteUsuario, id_cliente, id_usuario)
+    primary key (id_domiciliario)
 );
 
-CREATE TABLE (
-    
+CREATE TABLE entrega(
+    id_entrega int not null AUTO_INCREMENT UNIQUE,
+    estado_entrega boolean,
+    direccion_entrega varchar(50),
+    valor_entrega int,
+    fecha_entrega date,
+    id_domiciliario int,
+    foreign key (id_domiciliario) references domiciliario(id_domiciliario),
+    primary key (id_entrega)
 );
+
+CREATE TABLE tienda(
+    id_tienda int not null AUTO_INCREMENT UNIQUE,
+    nombre_tienda varchar(50),
+    telefono_tienda varchar(50),
+    direccion_tienda varchar(50),
+    primary key (id_tienda)
+);
+
+CREATE TABLE compra(
+    id_compra int not null AUTO_INCREMENT UNIQUE,
+    fecha_compra date,
+    numeroArticulos_compra int,
+    compraSinEntrega boolean,
+    compraConEntrega boolean,
+    valorTotal_compra int,
+    id_usuario int,
+    id_entrega int,
+    id_tienda int,
+    foreign key (id_usuario) references usuario(id_usuario),
+    foreign key (id_entrega) references entrega(id_entrega),
+    foreign key (id_tienda) references tienda(id_tienda),
+    primary key (id_compra)
+);
+
+CREATE TABLE tipoProducto(
+    id_tipoProducto int not null AUTO_INCREMENT UNIQUE,
+    nombre_tipoProducto varchar(50),
+    primary key (id_tipoProducto)
+);
+
+CREATE TABLE producto(
+    id_producto int not null AUTO_INCREMENT UNIQUE,
+    y_producto int,
+    x_producto int,
+    z_producto int,
+    caracteristicas varchar(50),
+    estado_producto boolean,
+    valor_producto int,
+    id_tipoProducto int,
+    foreign key (id_tipoProducto) references tipoProducto(id_tipoProducto),
+    primary key (id_producto)
+);
+
+CREATE TABLE compraProducto(
+    id_compraProducto int not null AUTO_INCREMENT UNIQUE,
+    id_compra int,
+    id_producto int,
+    cantidad_compraProducto int,
+    valor_compraProducto int,
+    foreign key (id_compra) references compra(id_compra),
+    foreign key (id_producto) references producto(id_producto),
+    primary key (id_compraProducto, id_compra, id_producto)
+);
+
+CREATE TABLE stock(
+    id_stock int not null AUTO_INCREMENT UNIQUE,
+    cantidad int,
+    disponibilidad boolean,
+    id_producto int,
+    id_tienda int,
+    foreign key (id_producto) references producto(id_producto),
+    foreign key (id_tienda) references tienda(id_tienda),
+    primary key (id_stock)
+);
+
+CREATE TABLE proveedor(
+    id_proveedor int not null AUTO_INCREMENT UNIQUE,
+    nombre_proveedor varchar(50),
+    telefono_proveedor varchar(50),
+    direccion_proveedor varchar(50),
+    primary key (id_proveedor)
+);
+
+CREATE TABLE productoProveedor(
+    id_productoProveedor int not null AUTO_INCREMENT UNIQUE,
+    id_producto int,
+    id_proveedor int,
+    cantidad_productoProveedor int,
+    fechaProduccion_productoProveedor date,
+    foreign key (id_producto) references producto(id_producto),
+    foreign key (id_proveedor) references proveedor(id_proveedor),
+    primary key (id_productoProveedor, id_producto, id_proveedor)
+);
+
+CREATE TABLE tiendaProveedor(
+    id_tiendaProveedor int not null AUTO_INCREMENT UNIQUE,
+    id_proveedor int,
+    id_tienda int,
+    id_producto int,
+    fechaCompra_tiendaProveedor date,
+    cantidad_tiendaProveedor int,
+    valorCompra_tiendaProveedor int,
+    foreign key (id_proveedor) references proveedor(id_proveedor),
+    foreign key (id_tienda) references tienda(id_tienda),
+    foreign key (id_producto) references producto(id_producto)
+);
+
+
+
 -------------------------------------------------------------------------------------------------
 

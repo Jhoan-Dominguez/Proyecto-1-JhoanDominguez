@@ -1,5 +1,4 @@
 <?php
-
   $opcion = 'default';
 
   if(isset($_GET["opcion"])){
@@ -42,7 +41,7 @@
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="./index.php?">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Nosotros</a>
@@ -51,57 +50,72 @@
             <a class="nav-link" href="#">Nuestros Proveedores</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categorias
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" href="#">Muebles</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Accesorios de Interiores</a></li>
-            </ul>
+          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categorias
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" href="#">Muebles</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Accesorios de Interiores</a></li>
+          </ul>
           </li>
         </ul>
-        <form class="d-flex">
-          <button class="btn btn-outline-success" type="submit">Iniciar Sesion</button>
-          <button class="btn btn-outline-success" type="submit">Crear Cuenta</button>
+        <form class="d-flex" id="formInicioCrear" action="index.php" method="POST">
+          <button class="btn btn-outline-success" onclick="mifunction()" id="iniciarSesion" name="iniciarSesion" type="submit" value="iniciarSesion">Iniciar Sesion</button>
+          <button class="btn btn-outline-success" id="crearCuenta" name="crearCuenta" type="submit" value="crearCuenta">Crear Cuenta</button>
         </form>
       </div>
     </div>
   </nav>
 
   <div class="div-body">
-    <h1 style=" font-family: 'Brush Script MT', cursive; ">Bienvenido a Pronto-Muebles</h1>
 
-    <?php
-    if ($pid != "" ) {
-        include $pid;
-    } else {
-    if ($opcion && $opcion=='default') {
-      ?>
-      <div class="body-imagen"></div>
-      <?php
-      }
-    else if ($opcion && $opcion=='insertar'){
-      include "./presentacion/insert.php";
-    }
-    else if ($opcion && $opcion=='consultar'){
-      include "./presentacion/read.php";
-    }
-  }?>
+    <?php ?>
+    <?php ?>
+
+    <?php if($opcion == 'default'):?>
+
+    <div>
+      <h1 style=" font-family: 'Brush Script MT', cursive; ">Bienvenido a Pronto-Muebles</h1>
+        <!-- contenido de la vista principal -->
+    </div>
+    <?php elseif($opcion == 'iniciarSesion'):?>
+    <div>
+      <?php include "./presentacion/inicioSesion.php"; ?>     
+    </div>
+    <?php elseif($opcion == 'crearCuenta'):?>
+    <div>
+    <?php include "./presentacion/crearCuenta.php"; ?>   
+    </div>
+    <?php else:?>
+    <div>
+      <h1>Error :c</h1>
+    </div>
+    <?php endif; ?>
+
   </div>
 
 </body>
 </html>
 
 <script>
-$("#opcion").change(function() {
-	let filas = $("#opcion").val();
-  if(filas != 'default'){
-    let url = "index.php?opcion=" + filas;
-	  location.replace(url);
-  }else{
-    let url = "index.php";
-	  location.replace(url);
-  }
-});
+
+  // function mifunction(){
+  //   location.replace("index.php?opcion=");
+  // }
+
+  $("#iniciarSesion").click(function(e){
+    let opcion = $(this).val();
+    let url = "index.php?opcion=" + opcion;
+    location.replace(url);
+    e.preventDefault(); 
+  })
+
+  $("#crearCuenta").click(function(e){
+    let opcion = $(this).val();
+    let url = "index.php?opcion=" + opcion;
+    location.replace(url);
+    e.preventDefault(); 
+  })
+
 </script>
