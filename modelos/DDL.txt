@@ -1,5 +1,5 @@
 correo: jhoandominguezu@gmail.com
-token: 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
+token: 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
 ------------------------------------------------------------------------------------------------
 create database prontoMuebles;
 
