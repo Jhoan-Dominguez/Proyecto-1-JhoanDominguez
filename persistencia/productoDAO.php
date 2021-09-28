@@ -1,27 +1,49 @@
 <?php
-class clienteDAO{
+class productoDAO {
+    
+private $id_producto;
+private $y_producto;
+private $x_producto;
+private $z_producto;
+private $caracteristicas;
+private $estado_producto;
+private $valor_producto;
+private $id_tipoProducto;
+    
+public function productoDAO( $id_producto="",$y_producto="",$x_producto="",$z_producto="",$caracteristicas="",$estado_producto="",$valor_producto="",$id_tipoProducto="" ) {
+    
+$this -> id_producto = $id_producto;
+$this -> y_producto = $y_producto;
+$this -> x_producto = $x_producto;
+$this -> z_producto = $z_producto;
+$this -> caracteristicas = $caracteristicas;
+$this -> estado_producto = $estado_producto;
+$this -> valor_producto = $valor_producto;
+$this -> id_tipoProducto = $id_tipoProducto;
+}
 
-    private $nombre_cliente;
+public function crear() {
+return "
+insert into producto (y_producto,x_producto,z_producto,caracteristicas,estado_producto,valor_producto,id_tipoProducto)
+values (
+ '" .$this -> y_producto. "', 
+ '" .$this -> x_producto. "', 
+ '" .$this -> z_producto. "', 
+ '" .$this -> caracteristicas. "', 
+ '" .$this -> estado_producto. "', 
+ '" .$this -> valor_producto. "', 
+ '" .$this -> id_tipoProducto. "'
 
-    public function clienteDAO($nombre_cliente=""){
-        $this -> nombre_cliente = $nombre_cliente;
-    }
+)";
+}
+    
+public function consultarTodos() {
+    return "select * from producto order by producto.id_producto asc ";
+}
 
-    public function crear(){
-        return "insert into cliente (nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, 
-        fechaNacimiento_cliente, id_usuario)
-                values (
-                '" . $this -> nombre_cliente . "'
-                )";
-    }
-
-    public function consultarTodos($filas, $pag){
-        return "select * from cliente order by cliente.id_cliente asc ";
-    }
-
-    public function consultarTotalFilas(){
-        return "select count(id_cliente) from cliente";
-    }
+public function consultarTotalFilas() {
+    return "select count(id_producto) from producto";
+}
 
 }
 ?>

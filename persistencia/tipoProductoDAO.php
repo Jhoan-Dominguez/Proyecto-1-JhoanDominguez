@@ -1,27 +1,31 @@
 <?php
-class clienteDAO{
+class tipoProductoDAO {
+    
+private $id_tipoProducto;
+private $nombre_tipoProducto;
+    
+public function tipoProductoDAO( $id_tipoProducto="",$nombre_tipoProducto="" ) {
+    
+$this -> id_tipoProducto = $id_tipoProducto;
+$this -> nombre_tipoProducto = $nombre_tipoProducto;
+}
 
-    private $nombre_cliente;
+public function crear() {
+return "
+insert into tipoProducto (nombre_tipoProducto)
+values (
+ '" .$this -> nombre_tipoProducto. "'
 
-    public function clienteDAO($nombre_cliente=""){
-        $this -> nombre_cliente = $nombre_cliente;
-    }
+)";
+}
+    
+public function consultarTodos() {
+    return "select * from tipoProducto order by tipoProducto.id_tipoProducto asc ";
+}
 
-    public function crear(){
-        return "insert into cliente (nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, 
-        fechaNacimiento_cliente, id_usuario)
-                values (
-                '" . $this -> nombre_cliente . "'
-                )";
-    }
-
-    public function consultarTodos($filas, $pag){
-        return "select * from cliente order by cliente.id_cliente asc ";
-    }
-
-    public function consultarTotalFilas(){
-        return "select count(id_cliente) from cliente";
-    }
+public function consultarTotalFilas() {
+    return "select count(id_tipoProducto) from tipoProducto";
+}
 
 }
 ?>

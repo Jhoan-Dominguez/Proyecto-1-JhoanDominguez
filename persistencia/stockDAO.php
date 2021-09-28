@@ -1,27 +1,40 @@
 <?php
-class clienteDAO{
+class stockDAO {
+    
+private $id_stock;
+private $cantidad;
+private $disponibilidad;
+private $id_producto;
+private $id_tienda;
+    
+public function stockDAO( $id_stock="",$cantidad="",$disponibilidad="",$id_producto="",$id_tienda="" ) {
+    
+$this -> id_stock = $id_stock;
+$this -> cantidad = $cantidad;
+$this -> disponibilidad = $disponibilidad;
+$this -> id_producto = $id_producto;
+$this -> id_tienda = $id_tienda;
+}
 
-    private $nombre_cliente;
+public function crear() {
+return "
+insert into stock (cantidad,disponibilidad,id_producto,id_tienda)
+values (
+ '" .$this -> cantidad. "', 
+ '" .$this -> disponibilidad. "', 
+ '" .$this -> id_producto. "', 
+ '" .$this -> id_tienda. "'
 
-    public function clienteDAO($nombre_cliente=""){
-        $this -> nombre_cliente = $nombre_cliente;
-    }
+)";
+}
+    
+public function consultarTodos() {
+    return "select * from stock order by stock.id_stock asc ";
+}
 
-    public function crear(){
-        return "insert into cliente (nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, 
-        fechaNacimiento_cliente, id_usuario)
-                values (
-                '" . $this -> nombre_cliente . "'
-                )";
-    }
-
-    public function consultarTodos($filas, $pag){
-        return "select * from cliente order by cliente.id_cliente asc ";
-    }
-
-    public function consultarTotalFilas(){
-        return "select count(id_cliente) from cliente";
-    }
+public function consultarTotalFilas() {
+    return "select count(id_stock) from stock";
+}
 
 }
 ?>

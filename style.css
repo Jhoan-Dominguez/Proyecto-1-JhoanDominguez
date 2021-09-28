@@ -4,9 +4,6 @@ body{
 
 .div-body{
     height: 100%;
-    display: grid;
-    align-items: center;
-    justify-items: center;
     color: black;
     /* border: 1px solid black; */
 }

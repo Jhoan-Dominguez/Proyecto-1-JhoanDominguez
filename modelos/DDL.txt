@@ -68,7 +68,6 @@ CREATE TABLE compra(
     id_compra int not null AUTO_INCREMENT UNIQUE,
     fecha_compra date,
     numeroArticulos_compra int,
-    compraSinEntrega boolean,
     compraConEntrega boolean,
     valorTotal_compra int,
     id_usuario int,
@@ -97,6 +96,36 @@ CREATE TABLE producto(
     id_tipoProducto int,
     foreign key (id_tipoProducto) references tipoProducto(id_tipoProducto),
     primary key (id_producto)
+);
+
+CREATE TABLE carrito(
+    id_carrito	int not null AUTO_INCREMENT UNIQUE,
+    fecha_carrito date,
+    numeroArticulos_carrito int,
+    estado_carrito boolean,
+    id_usuario int,
+    foreign key (id_usuario) references usuario(id_usuario),
+    primary key (id_carrito)
+);
+
+CREATE TABLE carritoProducto(
+    id_carritoProducto int not null AUTO_INCREMENT UNIQUE,
+    cantidad_carritoProducto int,
+    valor_carritoProducto int,
+    id_carrito int,
+    id_producto int,
+    foreign key (id_carrito) references carrito(id_carrito),
+    foreign key (id_producto) references producto(id_producto),
+    primary key (id_carritoProducto, id_carrito, id_producto)
+);
+
+CREATE TABLE compraCarrito(
+    id_compraCarrito int not null AUTO_INCREMENT UNIQUE,
+    id_compra int,
+    id_carrito int,
+    foreign key (id_carrito) references carrito(id_carrito),
+    foreign key (id_compra) references compra(id_compra),
+    primary key (id_compraCarrito, id_compra, id_carrito)
 );
 
 CREATE TABLE compraProducto(

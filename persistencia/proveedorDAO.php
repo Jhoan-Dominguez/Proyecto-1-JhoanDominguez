@@ -1,27 +1,37 @@
 <?php
-class clienteDAO{
+class proveedorDAO {
+    
+private $id_proveedor;
+private $nombre_proveedor;
+private $telefono_proveedor;
+private $direccion_proveedor;
+    
+public function proveedorDAO( $id_proveedor="",$nombre_proveedor="",$telefono_proveedor="",$direccion_proveedor="" ) {
+    
+$this -> id_proveedor = $id_proveedor;
+$this -> nombre_proveedor = $nombre_proveedor;
+$this -> telefono_proveedor = $telefono_proveedor;
+$this -> direccion_proveedor = $direccion_proveedor;
+}
 
-    private $nombre_cliente;
+public function crear() {
+return "
+insert into proveedor (nombre_proveedor,telefono_proveedor,direccion_proveedor)
+values (
+ '" .$this -> nombre_proveedor. "', 
+ '" .$this -> telefono_proveedor. "', 
+ '" .$this -> direccion_proveedor. "'
 
-    public function clienteDAO($nombre_cliente=""){
-        $this -> nombre_cliente = $nombre_cliente;
-    }
+)";
+}
+    
+public function consultarTodos() {
+    return "select * from proveedor order by proveedor.id_proveedor asc ";
+}
 
-    public function crear(){
-        return "insert into cliente (nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, 
-        fechaNacimiento_cliente, id_usuario)
-                values (
-                '" . $this -> nombre_cliente . "'
-                )";
-    }
-
-    public function consultarTodos($filas, $pag){
-        return "select * from cliente order by cliente.id_cliente asc ";
-    }
-
-    public function consultarTotalFilas(){
-        return "select count(id_cliente) from cliente";
-    }
+public function consultarTotalFilas() {
+    return "select count(id_proveedor) from proveedor";
+}
 
 }
 ?>

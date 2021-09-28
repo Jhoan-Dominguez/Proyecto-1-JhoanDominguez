@@ -1,27 +1,40 @@
 <?php
-class clienteDAO{
+class compraProductoDAO {
+    
+private $id_compraProducto;
+private $id_compra;
+private $id_producto;
+private $cantidad_compraProducto;
+private $valor_compraProducto;
+    
+public function compraProductoDAO( $id_compraProducto="",$id_compra="",$id_producto="",$cantidad_compraProducto="",$valor_compraProducto="" ) {
+    
+$this -> id_compraProducto = $id_compraProducto;
+$this -> id_compra = $id_compra;
+$this -> id_producto = $id_producto;
+$this -> cantidad_compraProducto = $cantidad_compraProducto;
+$this -> valor_compraProducto = $valor_compraProducto;
+}
 
-    private $nombre_cliente;
+public function crear() {
+return "
+insert into compraProducto (id_compra,id_producto,cantidad_compraProducto,valor_compraProducto)
+values (
+ '" .$this -> id_compra. "', 
+ '" .$this -> id_producto. "', 
+ '" .$this -> cantidad_compraProducto. "', 
+ '" .$this -> valor_compraProducto. "'
 
-    public function clienteDAO($nombre_cliente=""){
-        $this -> nombre_cliente = $nombre_cliente;
-    }
+)";
+}
+    
+public function consultarTodos() {
+    return "select * from compraProducto order by compraProducto.id_compraProducto asc ";
+}
 
-    public function crear(){
-        return "insert into cliente (nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, 
-        fechaNacimiento_cliente, id_usuario)
-                values (
-                '" . $this -> nombre_cliente . "'
-                )";
-    }
-
-    public function consultarTodos($filas, $pag){
-        return "select * from cliente order by cliente.id_cliente asc ";
-    }
-
-    public function consultarTotalFilas(){
-        return "select count(id_cliente) from cliente";
-    }
+public function consultarTotalFilas() {
+    return "select count(id_compraProducto) from compraProducto";
+}
 
 }
 ?>

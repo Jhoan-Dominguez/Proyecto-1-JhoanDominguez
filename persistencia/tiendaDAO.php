@@ -1,27 +1,37 @@
 <?php
-class clienteDAO{
+class tiendaDAO {
+    
+private $id_tienda;
+private $nombre_tienda;
+private $telefono_tienda;
+private $direccion_tienda;
+    
+public function tiendaDAO( $id_tienda="",$nombre_tienda="",$telefono_tienda="",$direccion_tienda="" ) {
+    
+$this -> id_tienda = $id_tienda;
+$this -> nombre_tienda = $nombre_tienda;
+$this -> telefono_tienda = $telefono_tienda;
+$this -> direccion_tienda = $direccion_tienda;
+}
 
-    private $nombre_cliente;
+public function crear() {
+return "
+insert into tienda (nombre_tienda,telefono_tienda,direccion_tienda)
+values (
+ '" .$this -> nombre_tienda. "', 
+ '" .$this -> telefono_tienda. "', 
+ '" .$this -> direccion_tienda. "'
 
-    public function clienteDAO($nombre_cliente=""){
-        $this -> nombre_cliente = $nombre_cliente;
-    }
+)";
+}
+    
+public function consultarTodos() {
+    return "select * from tienda order by tienda.id_tienda asc ";
+}
 
-    public function crear(){
-        return "insert into cliente (nombre_cliente, apellido_cliente, direccion_cliente, telefono_cliente, 
-        fechaNacimiento_cliente, id_usuario)
-                values (
-                '" . $this -> nombre_cliente . "'
-                )";
-    }
-
-    public function consultarTodos($filas, $pag){
-        return "select * from cliente order by cliente.id_cliente asc ";
-    }
-
-    public function consultarTotalFilas(){
-        return "select count(id_cliente) from cliente";
-    }
+public function consultarTotalFilas() {
+    return "select count(id_tienda) from tienda";
+}
 
 }
 ?>
