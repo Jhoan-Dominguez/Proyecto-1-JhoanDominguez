@@ -95,6 +95,18 @@ $this -> clienteDAO = new clienteDAO($this->id_cliente,$this->nombre_cliente,$th
         $this -> conexion -> cerrar();
         return $valoresRetornar;
     }
+
+    public function consultarCliente($id_usuario) {
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> consultarCliente($id_usuario));
+        
+        $valoresRetornar = array();
+        while( ($resultado = $this -> conexion -> extraer()) != null) {
+            array_push($valoresRetornar, new cliente( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4],$resultado[5],$resultado[6] ));
+        }
+        $this -> conexion -> cerrar();
+        return $valoresRetornar;
+    }
     
     public function consultarTotalFilas() {
         $this -> conexion -> abrir();

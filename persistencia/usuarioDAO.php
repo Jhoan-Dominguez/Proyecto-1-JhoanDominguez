@@ -27,6 +27,11 @@ values (
 
 )";
 }
+
+public function buscarUsuario($correo, $password){
+    return "select * from usuario where usuario.correo_usuario = '".$correo."' 
+            and usuario.password_usuario = '".$password."' ";
+}
     
 public function consultarTodos() {
     return "select * from usuario order by usuario.id_usuario asc ";

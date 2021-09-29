@@ -30,6 +30,10 @@ values (
 
 )";
 }
+
+public function consultarCarritos($id_usuario){
+    return "select * from carrito where carrito.id_usuario = '".$id_usuario."';";
+}
     
 public function consultarTodos() {
     return "select * from carrito order by carrito.id_carrito asc ";

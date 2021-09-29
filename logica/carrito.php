@@ -85,6 +85,18 @@ $this -> carritoDAO = new carritoDAO($this->id_carrito,$this->fecha_carrito,$thi
         $this -> conexion -> cerrar();
         return $valoresRetornar;
     }
+
+    public function consultarCarritos($id_usuario){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> carritoDAO -> consultarCarritos($id_usuario));
+        
+        $valoresRetornar = array();
+        while( ($resultado = $this -> conexion -> extraer()) != null) {
+            array_push($valoresRetornar, new carrito( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4],$resultado[5] ));
+        }
+        $this -> conexion -> cerrar();
+        return $valoresRetornar;
+    }
     
     public function consultarTotalFilas() {
         $this -> conexion -> abrir();

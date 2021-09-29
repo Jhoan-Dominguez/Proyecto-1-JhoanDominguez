@@ -55,15 +55,27 @@ private $usuarioDAO;
     
     public function usuario( $id_usuario="",$correo_usuario="",$password_usuario="",$estado_usuario="",$id_tipoUsuario="" ) {
         
-$this -> id_usuario = $id_usuario;
-$this -> correo_usuario = $correo_usuario;
-$this -> password_usuario = $password_usuario;
-$this -> estado_usuario = $estado_usuario;
-$this -> id_tipoUsuario = $id_tipoUsuario;
-$this -> conexion = new conexion();
-$this -> usuarioDAO = new usuarioDAO($this->id_usuario,$this->correo_usuario,$this->password_usuario,$this->estado_usuario,$this->id_tipoUsuario);
+        $this -> id_usuario = $id_usuario;
+        $this -> correo_usuario = $correo_usuario;
+        $this -> password_usuario = $password_usuario;
+        $this -> estado_usuario = $estado_usuario;
+        $this -> id_tipoUsuario = $id_tipoUsuario;
+        $this -> conexion = new conexion();
+        $this -> usuarioDAO = new usuarioDAO($this->id_usuario,$this->correo_usuario,$this->password_usuario,$this->estado_usuario,$this->id_tipoUsuario);
     }
     
+    public function buscarUsuario($correo, $password){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> usuarioDAO -> buscarUsuario($correo, $password));
+        
+        $valoresRetornar = array();
+        while( ($resultado = $this -> conexion -> extraer()) != null) {
+            array_push($valoresRetornar, new usuario( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4] ));
+        }
+        $this -> conexion -> cerrar();
+        return $valoresRetornar;
+    }
+
     public function consultarTodos() {
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> usuarioDAO -> consultarTodos());

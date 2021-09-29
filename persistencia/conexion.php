@@ -1,15 +1,15 @@
 <?php 
 class conexion {
-    private $mysql;
+    private $mysqli;
     private $resultado;
 
     public function abrir(){
-        $this -> mysql = new mysql("localhost", "root", "", "prontoMuebles");
-        $this -> mysql -> set_charset("utf8");
+        $this -> mysqli = new mysqli("localhost", "root", "", "prontoMuebles");
+        $this -> mysqli -> set_charset("utf8");
     }
 
     public function cerrar(){
-        $this -> mysql -> close();
+        $this -> mysqli -> close();
     }
 
     public function ejecutar($sentencia){
