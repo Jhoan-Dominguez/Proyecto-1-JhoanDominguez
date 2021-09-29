@@ -28,7 +28,18 @@
       $pid = base64_decode($_GET["pid"]);
   }
 
-  
+  if(isset($_GET['correo']) && isset($_GET['password'])){
+    $correo = $_GET['correo'];
+    $password = $_GET['password'];
+    
+    $usuario = new usuario();
+    $usuario = $usuario->buscarUsuario($correo, $password);
+
+    if($usuario){
+        session_start();
+        $_SESION['usuario'] = $usuario;
+    }
+  }
 
 ?>
 
@@ -81,8 +92,15 @@
           </li>
         </ul>
         <form class="d-flex" id="formInicioCrear" action="index.php" method="POST">
+          <?php if(!isset($_SESSION)) {?>
           <button class="btn btn-outline-success" onclick="mifunction()" id="iniciarSesion" name="iniciarSesion" type="submit" value="iniciarSesion">Iniciar Sesion</button>
           <button class="btn btn-outline-success" id="crearCuenta" name="crearCuenta" type="submit" value="crearCuenta">Crear Cuenta</button>
+          <?php }else{
+            ?>
+            <button class="btn btn-outline-success" id="carrito" name="carrito" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Carrito</button>
+            <button class="btn btn-outline-success" id="cerrarSesion" name="cerrarSesion" type="submit" value="cerrarSesion">Cerrar Sesion</button>
+          <?php  
+          } ?>
         </form>
       </div>
     </div>
@@ -91,7 +109,7 @@
   <div class="div-body">
 
     <?php ?>
-    <?php ?>
+    <?php if(!isset($_SESSION)) { ?>
 
     <?php if($opcion == 'default'):?>
 
@@ -113,6 +131,29 @@
     </div>
     <?php endif; ?>
 
+    <?php } else{
+      $usuario = $_SESION['usuario'];
+
+      if($usuario[0] -> getid_tipoUsuario() == 1){
+        ?>
+        <h1>administrador</h1>
+        <?php
+      }elseif ($usuario[0] -> getid_tipoUsuario() == 2){
+          ?>
+          <h1>domiciliario</h1>
+          <?php
+      }elseif ($usuario[0] -> getid_tipoUsuario() == 3){
+          ?>
+          <h1>cliente</h1>
+          <?php include "./presentacion/vistas/cliente/paginaGeneral.php" ?> 
+          <?php
+      }else{
+          echo "Error :c";
+      }
+      
+    } ?>
+
+
   </div>
 
 </body>
@@ -132,6 +173,14 @@
     let url = "index.php?opcion=" + opcion;
     location.replace(url);
     e.preventDefault(); 
+  })
+
+  $("#carrito").click(function(e){
+    e.preventDefault(); 
+  })
+
+  $("#cerrarSesion").click(function(e){
+    document.location('presentacion/vistas/cerrarSesion.php')
   })
 
 </script>

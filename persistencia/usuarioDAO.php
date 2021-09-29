@@ -30,7 +30,7 @@ values (
 
 public function buscarUsuario($correo, $password){
     return "select * from usuario where usuario.correo_usuario = '".$correo."' 
-            and usuario.password_usuario = '".$password."' ";
+            and usuario.password_usuario = '".$password."' and usuario.estado_usuario = 1 ";
 }
     
 public function consultarTodos() {
