@@ -1,5 +1,22 @@
 <?php
   require_once "logica/usuario.php";
+  require_once "logica/tipoUsuario.php";
+  require_once "logica/tipoProducto.php";
+  require_once "logica/tiendaProveedor.php";
+  require_once "logica/tienda.php";
+  require_once "logica/stock.php";
+  require_once "logica/proveedor.php";
+  require_once "logica/productoProveedor.php";
+  require_once "logica/producto.php";
+  require_once "logica/entrega.php";
+  require_once "logica/domiciliario.php";
+  require_once "logica/compraProducto.php";
+  require_once "logica/compraCarrito.php";
+  require_once "logica/compra.php";
+  require_once "logica/cliente.php";
+  require_once "logica/carritoProducto.php";
+  require_once "logica/carrito.php";
+
   $opcion = 'default';
 
   if(isset($_GET["opcion"])){
@@ -10,6 +27,8 @@
   if (isset($_GET["pid"])) {
       $pid = base64_decode($_GET["pid"]);
   }
+
+  
 
 ?>
 
