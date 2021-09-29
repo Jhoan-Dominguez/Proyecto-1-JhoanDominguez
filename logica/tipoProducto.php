@@ -1,6 +1,6 @@
 <?php
-requiere_once "persistencia/conexion.php";
-requiere_once "persistencia/tipoProductoDAO.php";
+require_once "persistencia/conexion.php";
+require_once "persistencia/tipoProductoDAO.php";
 
 class tipoProducto {
     

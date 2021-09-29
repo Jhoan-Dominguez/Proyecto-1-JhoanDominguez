@@ -1,4 +1,5 @@
 <?php
+  require_once "logica/usuario.php";
   $opcion = 'default';
 
   if(isset($_GET["opcion"])){
@@ -99,10 +100,6 @@
 </html>
 
 <script>
-
-  // function mifunction(){
-  //   location.replace("index.php?opcion=");
-  // }
 
   $("#iniciarSesion").click(function(e){
     let opcion = $(this).val();

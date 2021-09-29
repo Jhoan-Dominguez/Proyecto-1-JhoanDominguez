@@ -1,6 +1,6 @@
 <?php
-requiere_once "persistencia/conexion.php";
-requiere_once "persistencia/tiendaDAO.php";
+require_once "persistencia/conexion.php";
+require_once "persistencia/tiendaDAO.php";
 
 class tienda {
     

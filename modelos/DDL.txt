@@ -1,6 +1,4 @@
-correo: jhoandominguezu@gmail.com
-token: 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
-------------------------------------------------------------------------------------------------
+
 create database prontoMuebles;
 
 use prontoMuebles;
@@ -102,6 +100,7 @@ CREATE TABLE carrito(
     id_carrito	int not null AUTO_INCREMENT UNIQUE,
     fecha_carrito date,
     numeroArticulos_carrito int,
+    valor_carrito int,
     estado_carrito boolean,
     id_usuario int,
     foreign key (id_usuario) references usuario(id_usuario),
@@ -182,7 +181,4 @@ CREATE TABLE tiendaProveedor(
     foreign key (id_producto) references producto(id_producto)
 );
 
-
-
--------------------------------------------------------------------------------------------------
 

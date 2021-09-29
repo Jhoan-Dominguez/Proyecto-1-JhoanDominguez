@@ -1,12 +1,13 @@
 <?php
-requiere_once "persistencia/conexion.php";
-requiere_once "persistencia/carritoDAO.php";
+require_once "persistencia/conexion.php";
+require_once "persistencia/carritoDAO.php";
 
 class carrito {
     
 private $id_carrito;
 private $fecha_carrito;
 private $numeroArticulos_carrito;
+private $valor_carrito;
 private $estado_carrito;
 private $id_usuario;
 private $conexion;
@@ -40,6 +41,14 @@ private $carritoDAO;
     /**
      * @return
      */
+    public function getvalor_carrito() {
+        return $this -> valor_carrito;
+    }
+    
+
+    /**
+     * @return
+     */
     public function getestado_carrito() {
         return $this -> estado_carrito;
     }
@@ -53,15 +62,16 @@ private $carritoDAO;
     }
     
     
-    public function carrito( $id_carrito="",$fecha_carrito="",$numeroArticulos_carrito="",$estado_carrito="",$id_usuario="" ) {
+    public function carrito( $id_carrito="",$fecha_carrito="",$numeroArticulos_carrito="",$valor_carrito="",$estado_carrito="",$id_usuario="" ) {
         
 $this -> id_carrito = $id_carrito;
 $this -> fecha_carrito = $fecha_carrito;
 $this -> numeroArticulos_carrito = $numeroArticulos_carrito;
+$this -> valor_carrito = $valor_carrito;
 $this -> estado_carrito = $estado_carrito;
 $this -> id_usuario = $id_usuario;
 $this -> conexion = new conexion();
-$this -> carritoDAO = new carritoDAO($this->id_carrito,$this->fecha_carrito,$this->numeroArticulos_carrito,$this->estado_carrito,$this->id_usuario);
+$this -> carritoDAO = new carritoDAO($this->id_carrito,$this->fecha_carrito,$this->numeroArticulos_carrito,$this->valor_carrito,$this->estado_carrito,$this->id_usuario);
     }
     
     public function consultarTodos() {
@@ -70,7 +80,7 @@ $this -> carritoDAO = new carritoDAO($this->id_carrito,$this->fecha_carrito,$thi
         
         $valoresRetornar = array();
         while( ($resultado = $this -> conexion -> extraer()) != null) {
-            array_push($valoresRetornar, new carrito( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4] ));
+            array_push($valoresRetornar, new carrito( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4],$resultado[5] ));
         }
         $this -> conexion -> cerrar();
         return $valoresRetornar;

@@ -4,24 +4,27 @@ class carritoDAO {
 private $id_carrito;
 private $fecha_carrito;
 private $numeroArticulos_carrito;
+private $valor_carrito;
 private $estado_carrito;
 private $id_usuario;
     
-public function carritoDAO( $id_carrito="",$fecha_carrito="",$numeroArticulos_carrito="",$estado_carrito="",$id_usuario="" ) {
+public function carritoDAO( $id_carrito="",$fecha_carrito="",$numeroArticulos_carrito="",$valor_carrito="",$estado_carrito="",$id_usuario="" ) {
     
 $this -> id_carrito = $id_carrito;
 $this -> fecha_carrito = $fecha_carrito;
 $this -> numeroArticulos_carrito = $numeroArticulos_carrito;
+$this -> valor_carrito = $valor_carrito;
 $this -> estado_carrito = $estado_carrito;
 $this -> id_usuario = $id_usuario;
 }
 
 public function crear() {
 return "
-insert into carrito (fecha_carrito,numeroArticulos_carrito,estado_carrito,id_usuario)
+insert into carrito (fecha_carrito,numeroArticulos_carrito,valor_carrito,estado_carrito,id_usuario)
 values (
  '" .$this -> fecha_carrito. "', 
  '" .$this -> numeroArticulos_carrito. "', 
+ '" .$this -> valor_carrito. "', 
  '" .$this -> estado_carrito. "', 
  '" .$this -> id_usuario. "'
 

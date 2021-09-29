@@ -1,6 +1,6 @@
 <?php
-requiere_once "persistencia/conexion.php";
-requiere_once "persistencia/entregaDAO.php";
+require_once "persistencia/conexion.php";
+require_once "persistencia/entregaDAO.php";
 
 class entrega {
     

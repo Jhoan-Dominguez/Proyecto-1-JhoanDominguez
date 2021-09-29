@@ -1,5 +1,5 @@
 
-<div style="margin-top: 10%;">
+<div style="margin-top: 10px; margin-left: 30%; height: 100%; width: 500px">
     <div class="form-floating mb-3">
         <h1>Registro de Usuario</h1>
     </div>
