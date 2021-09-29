@@ -1,19 +1,6 @@
 
 <?php ?>
 <?php 
-
-    if(isset($_GET['correo']) && isset($_GET['password'])){
-        $correo = $_GET['correo'];
-        $password = $_GET['password'];
-        
-        $usuario = new usuario();
-        $usuario = $usuario->buscarUsuario($correo, $password);
-
-        if($usuario){
-            session_start();
-            $_SESION['usuario'] = $usuario;
-        }
-    }
 if(!isset($_SESSION)){
 ?>
 
@@ -36,30 +23,15 @@ if(!isset($_SESSION)){
 
 <?php 
 }else {
-
-    if($usuario[0] -> getid_tipoUsuario() == 1){
-        ?>
-        <h1>administrador</h1>
-        <?php
-    }elseif ($usuario[0] -> getid_tipoUsuario() == 2){
-        ?>
-        <h1>domiciliario</h1>
-        <?php
-    }elseif ($usuario[0] -> getid_tipoUsuario() == 3){
-        ?>
-        <h1>cliente</h1>
-        <?php include "./presentacion/vistas/cliente/paginaGeneral.php"; ?> 
-        <?php
-    }else{
-        echo "Error :c";
-    }
+    header('Location: ./index.php?');
+    die();
 }
 ?>
 <script>
 $("#btnIniciarSesion").click(function(e){
     let correo = $("#correo").val();
     let password = $("#password").val();
-    let url = "index.php?opcion=iniciarSesion" + "&correo=" + correo + '&password=' + password;
+    let url = "index.php?correo=" + correo + '&password=' + password;
     location.replace(url);
     e.preventDefault(); 
 })
