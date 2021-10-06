@@ -22,8 +22,8 @@ insert into usuario (correo_usuario,password_usuario,estado_usuario,id_tipoUsuar
 values (
  '" .$this -> correo_usuario. "', 
  '" .$this -> password_usuario. "', 
- '" .$this -> estado_usuario. "', 
- '" .$this -> id_tipoUsuario. "'
+ " .$this -> estado_usuario. ", 
+ " .$this -> id_tipoUsuario. "
 
 )";
 }

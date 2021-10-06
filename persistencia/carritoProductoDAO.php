@@ -20,10 +20,10 @@ public function crear() {
 return "
 insert into carritoProducto (cantidad_carritoProducto,valor_carritoProducto,id_carrito,id_producto)
 values (
- '" .$this -> cantidad_carritoProducto. "', 
- '" .$this -> valor_carritoProducto. "', 
- '" .$this -> id_carrito. "', 
- '" .$this -> id_producto. "'
+ " .$this -> cantidad_carritoProducto. ", 
+ " .$this -> valor_carritoProducto. ", 
+ " .$this -> id_carrito. ", 
+ " .$this -> id_producto. "
 
 )";
 }

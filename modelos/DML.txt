@@ -57,9 +57,9 @@ INSERT INTO stock (cantidad,disponibilidad,id_producto,id_tienda) VALUES ( 28, 1
 INSERT INTO stock (cantidad,disponibilidad,id_producto,id_tienda) VALUES ( 21, 1, 9, 1 );
 INSERT INTO stock (cantidad,disponibilidad,id_producto,id_tienda) VALUES ( 5, 1, 10, 1 );
 
-INSERT INTO carrito (fecha_carrito,numeroArticulos_carrito,valor_carrito,estado_carrito,id_usuario) VALUES ( '2021-12-01', 5, 440000, 1, 5 );
-INSERT INTO carrito (fecha_carrito,numeroArticulos_carrito,valor_carrito,estado_carrito,id_usuario) VALUES ( '2021-12-01', 3, 510000, 1, 6 );
-INSERT INTO carrito (fecha_carrito,numeroArticulos_carrito,valor_carrito,estado_carrito,id_usuario) VALUES ( '2021-12-01', 8, 1040000, 0, 7 );
+INSERT INTO carrito (numeroArticulos_carrito,valor_carrito,estado_carrito,id_usuario) VALUES ( 5, 440000, 1, 5 );
+INSERT INTO carrito (numeroArticulos_carrito,valor_carrito,estado_carrito,id_usuario) VALUES ( 3, 510000, 1, 6 );
+INSERT INTO carrito (numeroArticulos_carrito,valor_carrito,estado_carrito,id_usuario) VALUES ( 8, 1040000, 0, 7 );
 
 INSERT INTO carritoProducto (cantidad_carritoProducto,valor_carritoProducto,id_carrito,id_producto) VALUES ( 3, 300000, 1, 1 );
 INSERT INTO carritoProducto (cantidad_carritoProducto,valor_carritoProducto,id_carrito,id_producto) VALUES ( 2, 140000, 1, 2 );

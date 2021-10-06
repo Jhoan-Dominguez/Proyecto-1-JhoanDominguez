@@ -7,7 +7,7 @@ CREATE TABLE tipoUsuario(
     id_tipoUsuario int not null AUTO_INCREMENT UNIQUE,
     nombre_tipoUsuario varchar(50),
     nivel_tipoUsuario int,
-    primary key (id_tipoUsuario)
+    primary key (id_tipoUsuario)   
 );
 
 CREATE TABLE usuario(
@@ -98,7 +98,6 @@ CREATE TABLE producto(
 
 CREATE TABLE carrito(
     id_carrito	int not null AUTO_INCREMENT UNIQUE,
-    fecha_carrito date,
     numeroArticulos_carrito int,
     valor_carrito int,
     estado_carrito boolean,

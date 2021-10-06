@@ -26,13 +26,13 @@ public function crear() {
 return "
 insert into producto (y_producto,x_producto,z_producto,caracteristicas,estado_producto,valor_producto,id_tipoProducto)
 values (
- '" .$this -> y_producto. "', 
- '" .$this -> x_producto. "', 
- '" .$this -> z_producto. "', 
+ " .$this -> y_producto. ", 
+ " .$this -> x_producto. ", 
+ " .$this -> z_producto. ", 
  '" .$this -> caracteristicas. "', 
- '" .$this -> estado_producto. "', 
- '" .$this -> valor_producto. "', 
- '" .$this -> id_tipoProducto. "'
+ " .$this -> estado_producto. ", 
+ " .$this -> valor_producto. ", 
+ " .$this -> id_tipoProducto. "
 
 )";
 }

@@ -24,9 +24,9 @@ insert into domiciliario (nombre_domiciliario,apellido_domiciliario,codigo_domic
 values (
  '" .$this -> nombre_domiciliario. "', 
  '" .$this -> apellido_domiciliario. "', 
- '" .$this -> codigo_domiciliario. "', 
- '" .$this -> estado_domiciliario. "', 
- '" .$this -> id_usuario. "'
+ " .$this -> codigo_domiciliario. ", 
+ " .$this -> estado_domiciliario. ", 
+ " .$this -> id_usuario. "
 
 )";
 }

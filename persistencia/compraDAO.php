@@ -27,12 +27,12 @@ return "
 insert into compra (fecha_compra,numeroArticulos_compra,compraConEntrega,valorTotal_compra,id_usuario,id_entrega,id_tienda)
 values (
  '" .$this -> fecha_compra. "', 
- '" .$this -> numeroArticulos_compra. "', 
- '" .$this -> compraConEntrega. "', 
- '" .$this -> valorTotal_compra. "', 
- '" .$this -> id_usuario. "', 
- '" .$this -> id_entrega. "', 
- '" .$this -> id_tienda. "'
+ " .$this -> numeroArticulos_compra. ", 
+ " .$this -> compraConEntrega. ", 
+ " .$this -> valorTotal_compra. ", 
+ " .$this -> id_usuario. ", 
+ " .$this -> id_entrega. ", 
+ " .$this -> id_tienda. "
 
 )";
 }

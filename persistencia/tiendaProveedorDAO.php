@@ -25,12 +25,12 @@ public function crear() {
 return "
 insert into tiendaProveedor (id_proveedor,id_tienda,id_producto,fechaCompra_tiendaProveedor,cantidad_tiendaProveedor,valorCompra_tiendaProveedor)
 values (
- '" .$this -> id_proveedor. "', 
- '" .$this -> id_tienda. "', 
- '" .$this -> id_producto. "', 
+ " .$this -> id_proveedor. ", 
+ " .$this -> id_tienda. ", 
+ " .$this -> id_producto. ", 
  '" .$this -> fechaCompra_tiendaProveedor. "', 
- '" .$this -> cantidad_tiendaProveedor. "', 
- '" .$this -> valorCompra_tiendaProveedor. "'
+ " .$this -> cantidad_tiendaProveedor. ", 
+ " .$this -> valorCompra_tiendaProveedor. "
 
 )";
 }

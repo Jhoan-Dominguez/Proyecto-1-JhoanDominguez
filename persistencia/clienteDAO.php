@@ -30,7 +30,7 @@ values (
  '" .$this -> direccion_cliente. "', 
  '" .$this -> telefono_cliente. "', 
  '" .$this -> fechaNacimiento_cliente. "', 
- '" .$this -> id_usuario. "'
+ " .$this -> id_usuario. "
 
 )";
 }

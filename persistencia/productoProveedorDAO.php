@@ -20,9 +20,9 @@ public function crear() {
 return "
 insert into productoProveedor (id_producto,id_proveedor,cantidad_productoProveedor,fechaProduccion_productoProveedor)
 values (
- '" .$this -> id_producto. "', 
- '" .$this -> id_proveedor. "', 
- '" .$this -> cantidad_productoProveedor. "', 
+ " .$this -> id_producto. ", 
+ " .$this -> id_proveedor. ", 
+ " .$this -> cantidad_productoProveedor. ", 
  '" .$this -> fechaProduccion_productoProveedor. "'
 
 )";

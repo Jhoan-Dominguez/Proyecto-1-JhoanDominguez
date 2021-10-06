@@ -15,7 +15,6 @@ return "
 insert into tipoProducto (nombre_tipoProducto)
 values (
  '" .$this -> nombre_tipoProducto. "'
-
 )";
 }
     

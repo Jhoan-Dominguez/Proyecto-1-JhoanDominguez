@@ -17,7 +17,7 @@ return "
 insert into tipoUsuario (nombre_tipoUsuario,nivel_tipoUsuario)
 values (
  '" .$this -> nombre_tipoUsuario. "', 
- '" .$this -> nivel_tipoUsuario. "'
+ " .$this -> nivel_tipoUsuario. "
 
 )";
 }

@@ -5,7 +5,6 @@ require_once "persistencia/carritoDAO.php";
 class carrito {
     
 private $id_carrito;
-private $fecha_carrito;
 private $numeroArticulos_carrito;
 private $valor_carrito;
 private $estado_carrito;
@@ -19,14 +18,6 @@ private $carritoDAO;
      */
     public function getid_carrito() {
         return $this -> id_carrito;
-    }
-    
-
-    /**
-     * @return
-     */
-    public function getfecha_carrito() {
-        return $this -> fecha_carrito;
     }
     
 
@@ -62,16 +53,15 @@ private $carritoDAO;
     }
     
     
-    public function carrito( $id_carrito="",$fecha_carrito="",$numeroArticulos_carrito="",$valor_carrito="",$estado_carrito="",$id_usuario="" ) {
+    public function carrito( $id_carrito="",$numeroArticulos_carrito="",$valor_carrito="",$estado_carrito="",$id_usuario="" ) {
         
 $this -> id_carrito = $id_carrito;
-$this -> fecha_carrito = $fecha_carrito;
 $this -> numeroArticulos_carrito = $numeroArticulos_carrito;
 $this -> valor_carrito = $valor_carrito;
 $this -> estado_carrito = $estado_carrito;
 $this -> id_usuario = $id_usuario;
 $this -> conexion = new conexion();
-$this -> carritoDAO = new carritoDAO($this->id_carrito,$this->fecha_carrito,$this->numeroArticulos_carrito,$this->valor_carrito,$this->estado_carrito,$this->id_usuario);
+$this -> carritoDAO = new carritoDAO($this->id_carrito,$this->numeroArticulos_carrito,$this->valor_carrito,$this->estado_carrito,$this->id_usuario);
     }
     
     public function consultarTodos() {
@@ -80,7 +70,7 @@ $this -> carritoDAO = new carritoDAO($this->id_carrito,$this->fecha_carrito,$thi
         
         $valoresRetornar = array();
         while( ($resultado = $this -> conexion -> extraer()) != null) {
-            array_push($valoresRetornar, new carrito( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4],$resultado[5] ));
+            array_push($valoresRetornar, new carrito( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4]));
         }
         $this -> conexion -> cerrar();
         return $valoresRetornar;
@@ -92,7 +82,7 @@ $this -> carritoDAO = new carritoDAO($this->id_carrito,$this->fecha_carrito,$thi
         
         $valoresRetornar = array();
         while( ($resultado = $this -> conexion -> extraer()) != null) {
-            array_push($valoresRetornar, new carrito( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4],$resultado[5] ));
+            array_push($valoresRetornar, new carrito( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4] ));
         }
         $this -> conexion -> cerrar();
         return $valoresRetornar;

@@ -22,11 +22,11 @@ public function crear() {
 return "
 insert into entrega (estado_entrega,direccion_entrega,valor_entrega,fecha_entrega,id_domiciliario)
 values (
- '" .$this -> estado_entrega. "', 
+ " .$this -> estado_entrega. ", 
  '" .$this -> direccion_entrega. "', 
- '" .$this -> valor_entrega. "', 
+ " .$this -> valor_entrega. ", 
  '" .$this -> fecha_entrega. "', 
- '" .$this -> id_domiciliario. "'
+ " .$this -> id_domiciliario. "
 
 )";
 }

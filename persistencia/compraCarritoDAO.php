@@ -16,8 +16,8 @@ public function crear() {
 return "
 insert into compraCarrito (id_compra,id_carrito)
 values (
- '" .$this -> id_compra. "', 
- '" .$this -> id_carrito. "'
+ " .$this -> id_compra. ", 
+ " .$this -> id_carrito. "
 
 )";
 }

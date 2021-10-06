@@ -20,10 +20,10 @@ public function crear() {
 return "
 insert into stock (cantidad,disponibilidad,id_producto,id_tienda)
 values (
- '" .$this -> cantidad. "', 
- '" .$this -> disponibilidad. "', 
- '" .$this -> id_producto. "', 
- '" .$this -> id_tienda. "'
+ " .$this -> cantidad. ", 
+ " .$this -> disponibilidad. ", 
+ " .$this -> id_producto. ", 
+ " .$this -> id_tienda. "
 
 )";
 }
