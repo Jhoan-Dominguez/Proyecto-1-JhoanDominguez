@@ -1,4 +1,5 @@
 <?php
+
   require_once "logica/usuario.php";
   require_once "logica/tipoUsuario.php";
   require_once "logica/tipoProducto.php";
@@ -17,6 +18,8 @@
   require_once "logica/carritoProducto.php";
   require_once "logica/carrito.php";
 
+  session_start();
+
   $opcion = 'default';
 
   if(isset($_GET["opcion"])){
@@ -26,19 +29,6 @@
   $pid = "";
   if (isset($_GET["pid"])) {
       $pid = base64_decode($_GET["pid"]);
-  }
-
-  if(isset($_GET['correo']) && isset($_GET['password'])){
-    $correo = $_GET['correo'];
-    $password = $_GET['password'];
-    
-    $usuario = new usuario();
-    $usuario = $usuario->buscarUsuario($correo, $password);
-
-    if($usuario){
-        session_start();
-        $_SESION['usuario'] = $usuario;
-    }
   }
 
 ?>
@@ -92,8 +82,8 @@
           </li>
         </ul>
         <form class="d-flex" id="formInicioCrear" action="index.php" method="POST">
-          <?php if(!isset($_SESSION)) {?>
-          <button class="btn btn-outline-success" onclick="mifunction()" id="iniciarSesion" name="iniciarSesion" type="submit" value="iniciarSesion">Iniciar Sesion</button>
+          <?php if(!isset($_SESSION['usuario'])) {?>
+          <button class="btn btn-outline-success" id="iniciarSesion" name="iniciarSesion" type="submit" value="iniciarSesion">Iniciar Sesion</button>
           <button class="btn btn-outline-success" id="crearCuenta" name="crearCuenta" type="submit" value="crearCuenta">Crear Cuenta</button>
           <?php }else{
             ?>
@@ -109,7 +99,7 @@
   <div class="div-body">
 
     <?php ?>
-    <?php if(!isset($_SESSION)) { ?>
+    <?php if(!isset($_SESSION['usuario'])) { ?>
 
     <?php if($opcion == 'default'):?>
 
@@ -119,11 +109,11 @@
     </div>
     <?php elseif($opcion == 'iniciarSesion'):?>
     <div>
-      <?php include "./presentacion/inicioSesion.php"; ?>     
+      <?php include "./presentacion/vistaInicioSesion.php"; ?>     
     </div>
     <?php elseif($opcion == 'crearCuenta'):?>
     <div>
-    <?php include "./presentacion/crearCuenta.php"; ?>   
+    <?php include "./presentacion/vistaCrearCuenta.php"; ?>   
     </div>
     <?php else:?>
     <div>
@@ -132,7 +122,7 @@
     <?php endif; ?>
 
     <?php } else{
-      $usuario = $_SESION['usuario'];
+      $usuario = $_SESSION['usuario'];
 
       if($usuario[0] -> getid_tipoUsuario() == 1){
         ?>
@@ -145,12 +135,11 @@
       }elseif ($usuario[0] -> getid_tipoUsuario() == 3){
           ?>
           <h1>cliente</h1>
-          <?php include "./presentacion/vistas/cliente/paginaGeneral.php" ?> 
+          <?php include "presentacion/cliente/vistas/paginaGeneral.php" ?> 
           <?php
       }else{
           echo "Error :c";
       }
-      
     } ?>
 
 
@@ -158,7 +147,7 @@
 
 </body>
 </html>
-
+<script src="./scripts.js"></script>
 <script>
 
   $("#iniciarSesion").click(function(e){
@@ -178,9 +167,10 @@
   $("#carrito").click(function(e){
     e.preventDefault(); 
   })
-
+ 
   $("#cerrarSesion").click(function(e){
-    document.location('presentacion/vistas/cerrarSesion.php')
+    e.preventDefault(); 
+    location.replace('presentacion/cerrarSesion.php')
   })
 
 </script>

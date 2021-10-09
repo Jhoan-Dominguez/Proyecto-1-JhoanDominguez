@@ -64,14 +64,14 @@ private $entregaDAO;
     
     public function entrega( $id_entrega="",$estado_entrega="",$direccion_entrega="",$valor_entrega="",$fecha_entrega="",$id_domiciliario="" ) {
         
-$this -> id_entrega = $id_entrega;
-$this -> estado_entrega = $estado_entrega;
-$this -> direccion_entrega = $direccion_entrega;
-$this -> valor_entrega = $valor_entrega;
-$this -> fecha_entrega = $fecha_entrega;
-$this -> id_domiciliario = $id_domiciliario;
-$this -> conexion = new conexion();
-$this -> entregaDAO = new entregaDAO($this->id_entrega,$this->estado_entrega,$this->direccion_entrega,$this->valor_entrega,$this->fecha_entrega,$this->id_domiciliario);
+        $this -> id_entrega = $id_entrega;
+        $this -> estado_entrega = $estado_entrega;
+        $this -> direccion_entrega = $direccion_entrega;
+        $this -> valor_entrega = $valor_entrega;
+        $this -> fecha_entrega = $fecha_entrega;
+        $this -> id_domiciliario = $id_domiciliario;
+        $this -> conexion = new conexion();
+        $this -> entregaDAO = new entregaDAO($this->id_entrega,$this->estado_entrega,$this->direccion_entrega,$this->valor_entrega,$this->fecha_entrega,$this->id_domiciliario);
     }
     
     public function consultarTodos() {

@@ -20,12 +20,10 @@ public function crear() {
 return "
 insert into compraProducto (id_compra,id_producto,cantidad_compraProducto,valor_compraProducto)
 values (
- " .$this -> id_compra. ", 
- " .$this -> id_producto. ", 
- " .$this -> cantidad_compraProducto. ", 
- " .$this -> valor_compraProducto. "
-
-)";
+" .$this -> id_compra. ", 
+" .$this -> id_producto. ", 
+" .$this -> cantidad_compraProducto. ", 
+" .$this -> valor_compraProducto. ")";
 }
     
 public function consultarTodos() {

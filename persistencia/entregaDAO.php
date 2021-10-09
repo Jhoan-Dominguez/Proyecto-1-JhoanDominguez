@@ -27,7 +27,6 @@ values (
  " .$this -> valor_entrega. ", 
  '" .$this -> fecha_entrega. "', 
  " .$this -> id_domiciliario. "
-
 )";
 }
     

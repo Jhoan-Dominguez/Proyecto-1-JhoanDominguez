@@ -55,13 +55,13 @@ private $stockDAO;
     
     public function stock( $id_stock="",$cantidad="",$disponibilidad="",$id_producto="",$id_tienda="" ) {
         
-$this -> id_stock = $id_stock;
-$this -> cantidad = $cantidad;
-$this -> disponibilidad = $disponibilidad;
-$this -> id_producto = $id_producto;
-$this -> id_tienda = $id_tienda;
-$this -> conexion = new conexion();
-$this -> stockDAO = new stockDAO($this->id_stock,$this->cantidad,$this->disponibilidad,$this->id_producto,$this->id_tienda);
+        $this -> id_stock = $id_stock;
+        $this -> cantidad = $cantidad;
+        $this -> disponibilidad = $disponibilidad;
+        $this -> id_producto = $id_producto;
+        $this -> id_tienda = $id_tienda;
+        $this -> conexion = new conexion();
+        $this -> stockDAO = new stockDAO($this->id_stock,$this->cantidad,$this->disponibilidad,$this->id_producto,$this->id_tienda);
     }
     
     public function consultarTodos() {
@@ -82,13 +82,19 @@ $this -> stockDAO = new stockDAO($this->id_stock,$this->cantidad,$this->disponib
         $resultado = $this -> conexion -> extraer()[0];
         $this -> conexion -> cerrar();
         return $resultado;
-    } 
+    }
+
+    public function actualizarProducto($id_producto, $cantidad){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> stockDAO -> actualizarProducto($id_producto, $cantidad) );
+        $this -> conexion -> cerrar();
+    }
     
     public function crear() {
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> stockDAO -> crear());
         $this -> conexion -> cerrar();
-    } 
+    }
     
 }
 ?>

@@ -19,16 +19,22 @@ $this -> id_usuario = $id_usuario;
 }
 
 public function crear() {
-return "
-insert into domiciliario (nombre_domiciliario,apellido_domiciliario,codigo_domiciliario,estado_domiciliario,id_usuario)
-values (
- '" .$this -> nombre_domiciliario. "', 
- '" .$this -> apellido_domiciliario. "', 
- " .$this -> codigo_domiciliario. ", 
- " .$this -> estado_domiciliario. ", 
- " .$this -> id_usuario. "
+    return "
+        insert into domiciliario (nombre_domiciliario,apellido_domiciliario,codigo_domiciliario,estado_domiciliario,id_usuario)
+        values (
+        '" .$this -> nombre_domiciliario. "', 
+        '" .$this -> apellido_domiciliario. "', 
+        " .$this -> codigo_domiciliario. ", 
+        " .$this -> estado_domiciliario. ", 
+        " .$this -> id_usuario. "
 
-)";
+        )";
+}
+
+public function consultarIdsDomiciliario(){
+    return "
+        select id_domiciliario, nombre_domiciliario, apellido_domiciliario from domiciliario
+    ";
 }
     
 public function consultarTodos() {

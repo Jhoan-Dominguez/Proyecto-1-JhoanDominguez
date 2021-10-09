@@ -82,16 +82,16 @@ private $compraDAO;
     
     public function compra( $id_compra="",$fecha_compra="",$numeroArticulos_compra="",$compraConEntrega="",$valorTotal_compra="",$id_usuario="",$id_entrega="",$id_tienda="" ) {
         
-$this -> id_compra = $id_compra;
-$this -> fecha_compra = $fecha_compra;
-$this -> numeroArticulos_compra = $numeroArticulos_compra;
-$this -> compraConEntrega = $compraConEntrega;
-$this -> valorTotal_compra = $valorTotal_compra;
-$this -> id_usuario = $id_usuario;
-$this -> id_entrega = $id_entrega;
-$this -> id_tienda = $id_tienda;
-$this -> conexion = new conexion();
-$this -> compraDAO = new compraDAO($this->id_compra,$this->fecha_compra,$this->numeroArticulos_compra,$this->compraConEntrega,$this->valorTotal_compra,$this->id_usuario,$this->id_entrega,$this->id_tienda);
+        $this -> id_compra = $id_compra;
+        $this -> fecha_compra = $fecha_compra;
+        $this -> numeroArticulos_compra = $numeroArticulos_compra;
+        $this -> compraConEntrega = $compraConEntrega;
+        $this -> valorTotal_compra = $valorTotal_compra;
+        $this -> id_usuario = $id_usuario;
+        $this -> id_entrega = $id_entrega;
+        $this -> id_tienda = $id_tienda;
+        $this -> conexion = new conexion();
+        $this -> compraDAO = new compraDAO($this->id_compra,$this->fecha_compra,$this->numeroArticulos_compra,$this->compraConEntrega,$this->valorTotal_compra,$this->id_usuario,$this->id_entrega,$this->id_tienda);
     }
     
     public function consultarTodos() {

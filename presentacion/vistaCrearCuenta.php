@@ -32,6 +32,46 @@
         <label for="password">Password</label>
     </div>
     <div class="d-grid">
-        <button type="submit" name="btnCrearCuenta" class="btn btn-primary">Crear Cuenta</button>
+        <button onclick="crear()" name="btnCrearCuenta" class="btn btn-primary">Crear Cuenta</button>
     </div>
 </div>
+
+<script>
+  function crear(){
+        let nombre = $("#nombre").val();
+        let apellido = $("#apellido").val();
+        let direccion = $("#direccion").val();
+        let telefono = $("#numeroTelefono").val();
+        let yearBorn = $("#yearBorn").val();
+        let correo = $("#correo").val();
+        let password = $("#password").val();
+
+        if ( nombre.length==0 || apellido.length==0 || direccion.length==0 || telefono.length==0 || numeroTelefono.length==0 || 
+            yearBorn.length==0 || correo.length==0 || password.length==0 ){
+                alert("No se permiten campos vacios")
+            }
+        $.ajax({
+            url: "funciones.php",
+            type: 'POST',
+            data: {
+                opcion: 'crearCuenta',
+                nombre: nombre,
+                apellido: apellido,
+                direccion: direccion,
+                telefono: telefono,
+                yearBorn: yearBorn,
+                correo: correo,
+                password: password,
+            }
+        }).done(function(response){
+
+            if(response == 0){
+                alert(response)
+            }else{
+                alert('usuario creado con exito')
+                location.replace("index.php?");
+            }
+        })
+
+    }
+</script>

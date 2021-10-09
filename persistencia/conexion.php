@@ -14,6 +14,7 @@ class conexion {
 
     public function ejecutar($sentencia){
         $this -> resultado = $this -> mysqli -> query($sentencia);
+        // printf("Errormessage: %s\n", $this -> mysqli->error);
     }
     
     public function extraer(){

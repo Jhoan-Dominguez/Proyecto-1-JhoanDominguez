@@ -18,14 +18,21 @@ $this -> id_tienda = $id_tienda;
 
 public function crear() {
 return "
-insert into stock (cantidad,disponibilidad,id_producto,id_tienda)
-values (
- " .$this -> cantidad. ", 
- " .$this -> disponibilidad. ", 
- " .$this -> id_producto. ", 
- " .$this -> id_tienda. "
+    insert into stock (cantidad,disponibilidad,id_producto,id_tienda)
+    values (
+    " .$this -> cantidad. ", 
+    " .$this -> disponibilidad. ", 
+    " .$this -> id_producto. ", 
+    " .$this -> id_tienda. "
 
-)";
+    )";
+}
+
+public function actualizarProducto($id_producto, $cantidad){
+return "
+    update stock set cantidad = cantidad - " .$cantidad. "
+    where stock.id_producto = ". $id_producto ."
+";
 }
     
 public function consultarTodos() {

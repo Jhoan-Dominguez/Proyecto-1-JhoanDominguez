@@ -55,13 +55,13 @@ private $compraProductoDAO;
     
     public function compraProducto( $id_compraProducto="",$id_compra="",$id_producto="",$cantidad_compraProducto="",$valor_compraProducto="" ) {
         
-$this -> id_compraProducto = $id_compraProducto;
-$this -> id_compra = $id_compra;
-$this -> id_producto = $id_producto;
-$this -> cantidad_compraProducto = $cantidad_compraProducto;
-$this -> valor_compraProducto = $valor_compraProducto;
-$this -> conexion = new conexion();
-$this -> compraProductoDAO = new compraProductoDAO($this->id_compraProducto,$this->id_compra,$this->id_producto,$this->cantidad_compraProducto,$this->valor_compraProducto);
+        $this -> id_compraProducto = $id_compraProducto;
+        $this -> id_compra = $id_compra;
+        $this -> id_producto = $id_producto;
+        $this -> cantidad_compraProducto = $cantidad_compraProducto;
+        $this -> valor_compraProducto = $valor_compraProducto;
+        $this -> conexion = new conexion();
+        $this -> compraProductoDAO = new compraProductoDAO($this->id_compraProducto,$this->id_compra,$this->id_producto,$this->cantidad_compraProducto,$this->valor_compraProducto);
     }
     
     public function consultarTodos() {

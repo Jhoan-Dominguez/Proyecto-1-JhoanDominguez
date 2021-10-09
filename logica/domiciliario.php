@@ -64,14 +64,14 @@ private $domiciliarioDAO;
     
     public function domiciliario( $id_domiciliario="",$nombre_domiciliario="",$apellido_domiciliario="",$codigo_domiciliario="",$estado_domiciliario="",$id_usuario="" ) {
         
-$this -> id_domiciliario = $id_domiciliario;
-$this -> nombre_domiciliario = $nombre_domiciliario;
-$this -> apellido_domiciliario = $apellido_domiciliario;
-$this -> codigo_domiciliario = $codigo_domiciliario;
-$this -> estado_domiciliario = $estado_domiciliario;
-$this -> id_usuario = $id_usuario;
-$this -> conexion = new conexion();
-$this -> domiciliarioDAO = new domiciliarioDAO($this->id_domiciliario,$this->nombre_domiciliario,$this->apellido_domiciliario,$this->codigo_domiciliario,$this->estado_domiciliario,$this->id_usuario);
+        $this -> id_domiciliario = $id_domiciliario;
+        $this -> nombre_domiciliario = $nombre_domiciliario;
+        $this -> apellido_domiciliario = $apellido_domiciliario;
+        $this -> codigo_domiciliario = $codigo_domiciliario;
+        $this -> estado_domiciliario = $estado_domiciliario;
+        $this -> id_usuario = $id_usuario;
+        $this -> conexion = new conexion();
+        $this -> domiciliarioDAO = new domiciliarioDAO($this->id_domiciliario,$this->nombre_domiciliario,$this->apellido_domiciliario,$this->codigo_domiciliario,$this->estado_domiciliario,$this->id_usuario);
     }
     
     public function consultarTodos() {
@@ -81,6 +81,18 @@ $this -> domiciliarioDAO = new domiciliarioDAO($this->id_domiciliario,$this->nom
         $valoresRetornar = array();
         while( ($resultado = $this -> conexion -> extraer()) != null) {
             array_push($valoresRetornar, new domiciliario( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4],$resultado[5] ));
+        }
+        $this -> conexion -> cerrar();
+        return $valoresRetornar;
+    }
+
+    public function consultarIdsDomiciliario(){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> domiciliarioDAO -> consultarIdsDomiciliario());
+        
+        $valoresRetornar = array();
+        while( ($resultado = $this -> conexion -> extraer()) != null) {
+            array_push($valoresRetornar, [$resultado[0],$resultado[1], $resultado[2]]);
         }
         $this -> conexion -> cerrar();
         return $valoresRetornar;

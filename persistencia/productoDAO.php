@@ -33,8 +33,11 @@ values (
  " .$this -> estado_producto. ", 
  " .$this -> valor_producto. ", 
  " .$this -> id_tipoProducto. "
-
 )";
+}
+
+public function consultarProducto($idProducto){
+    return "select * from producto where producto.id_producto = ".$idProducto;
 }
     
 public function consultarTodos() {
