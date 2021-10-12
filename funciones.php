@@ -50,6 +50,13 @@ if(isset($_POST['opcion'])){
         compraCarrito();
     }
     
+    if($_POST['opcion'] == 'actualizarDatos'){
+        actualizarDatos();
+    }
+
+    if($_POST['opcion'] == 'actualizarEStado'){
+        actualizarEStado();
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -114,6 +121,40 @@ function buscarCarritoProducto($idCarrito){
     $carritoProducto = new carritoProducto();
     $carritoProducto = $carritoProducto -> consultarProductosCarrito($idCarrito);
     return $carritoProducto;
+}
+
+function actualizarEStado(){
+    if( isset($_SESSION['usuario']) && isset($_POST['idUsuario'])  && isset($_POST['estado']) ){
+        $idUsuario = $_POST['idUsuario'];
+        $estado = $_POST['estado'];
+
+        $usuario = new usuario();
+        $usuario -> actualizarEStado( $idUsuario, $estado);
+        echo 1;
+    }
+}
+
+function actualizarDatos(){
+    if( isset($_SESSION['usuario']) && isset($_POST['nombre'])  && isset($_POST['apellido']) && isset($_POST['direccion'])
+    && isset($_POST['numero'])  && isset($_POST['correo']) && isset($_POST['password']) && isset($_POST['idUsuario']) ){
+
+        $idUsuario = $_POST['idUsuario'];
+        $nombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $direccion = $_POST['direccion'];
+        $numero = $_POST['numero'];
+        $correo = $_POST['correo'];
+        $password = $_POST['password'];
+
+        $usuario = new usuario();
+        $usuario -> actualizarDatos($idUsuario, $correo, $password);
+
+        $cliente = new cliente();
+        $cliente -> actualizarDatos($idUsuario, $nombre, $apellido, $direccion, $numero);
+
+        echo 1;
+            
+    }
 }
 
 function compraCarrito(){
@@ -413,7 +454,7 @@ function comprarProducto(){
 
 function inciarSesion(){
     if(isset($_POST['correo']) && isset($_POST['password'])){
-        $correo = $_POST['correo'];
+        $correo = $_POST['correo']; 
         $password = $_POST['password'];
             
         $usuario = new usuario();

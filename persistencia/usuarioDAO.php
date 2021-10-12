@@ -29,14 +29,12 @@ values (
 }
 
 public function actualizarDatos( $idUsuario, $correo, $pass){
-
     return "
-        update usuario set correo_usuario = " .$correo. ", password_usuario = " .$pass. " 
+        update usuario set correo_usuario = '" .$correo. "', password_usuario = '" .$pass. "' 
         where id_usuario = ".$idUsuario;
 }
 
 public function actualizarEStado( $idUsuario, $estado){
-
     return "
         update usuario set estado_usuario = " .$estado. "
         where id_usuario = ".$idUsuario;

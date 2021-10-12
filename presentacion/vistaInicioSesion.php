@@ -46,7 +46,6 @@ if(!isset($_SESSION['usuario'])){
                 password: password,
             }
         }).done(function(response){
-            
             if(response == 1){
                 location.replace("index.php?");
             }else{

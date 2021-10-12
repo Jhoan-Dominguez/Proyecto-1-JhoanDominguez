@@ -84,9 +84,9 @@ private $clienteDAO;
         $this -> clienteDAO = new clienteDAO($this->id_cliente,$this->nombre_cliente,$this->apellido_cliente,$this->direccion_cliente,$this->telefono_cliente,$this->fechaNacimiento_cliente,$this->id_usuario);
     }
     
-    public function actualizarDatos($idCliente, $nombre, $apellido, $direccion, $telefono){
+    public function actualizarDatos($idUsuario, $nombre, $apellido, $direccion, $telefono){
         $this -> conexion -> abrir();
-        $this -> conexion -> ejecutar($this -> clienteDAO -> actualizarDatos($idCliente, $nombre, $apellido, $direccion, $telefono) );
+        $this -> conexion -> ejecutar($this -> clienteDAO -> actualizarDatos($idUsuario, $nombre, $apellido, $direccion, $telefono) );
         $this -> conexion -> cerrar();
     }
 

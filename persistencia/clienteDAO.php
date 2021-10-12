@@ -35,11 +35,11 @@ values (
 )";
 }
 
-public function actualizarDatos($idCliente, $nombre, $apellido, $direccion, $telefono){
+public function actualizarDatos($idUsuario, $nombre, $apellido, $direccion, $telefono){
     return "
-    update cliente set nombre_cliente = " .$nombre. ", apellido_cliente = " .$apellido. ",
-    direccion_cliente = " .$direccion. ", telefono_cliente = " .$telefono_cliente. "
-    where id_cliente = ".$idCliente;
+    update cliente set nombre_cliente = '" .$nombre. "', apellido_cliente = '" .$apellido. "',
+    direccion_cliente = '" .$direccion. "', telefono_cliente = '" .$telefono. "'
+    where id_usuario = ".$idUsuario;
 }
 
 public function consultarCliente($id_usuario) {

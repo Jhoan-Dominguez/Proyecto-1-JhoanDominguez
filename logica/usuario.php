@@ -79,7 +79,11 @@ private $usuarioDAO;
     public function actualizarDatos($idUsuario, $correo, $pass){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> usuarioDAO -> actualizarDatos($idUsuario, $correo, $pass) );
-        return $valoresRetornar;
+    }
+
+    public function actualizarEStado( $idUsuario, $estado){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> usuarioDAO -> actualizarEStado($idUsuario, $estado) );
     }
 
     public function consultarTodos() {

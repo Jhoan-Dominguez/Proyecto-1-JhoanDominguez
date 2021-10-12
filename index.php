@@ -49,6 +49,8 @@
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
     <script 
     src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>	
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 <body>
@@ -127,10 +129,14 @@
       if($usuario[0] -> getid_tipoUsuario() == 1){
         ?>
         <h1>administrador</h1>
+        <?php include "presentacion/administrador/vistas/paginaGeneral.php" ?> 
+
         <?php
       }elseif ($usuario[0] -> getid_tipoUsuario() == 2){
           ?>
           <h1>domiciliario</h1>
+        <?php include "presentacion/domiciliario/vistas/paginaGeneral.php" ?> 
+
           <?php
       }elseif ($usuario[0] -> getid_tipoUsuario() == 3){
           ?>
