@@ -50,7 +50,7 @@ if(!isset($_SESSION['usuario'])){
             if(response == 1){
                 location.replace("index.php?");
             }else{
-                alert("Error, Datos Incorrectos"+response);
+                alert("Error, Datos Incorrectos");
             }
         })
     }

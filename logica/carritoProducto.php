@@ -55,13 +55,13 @@ private $carritoProductoDAO;
     
     public function carritoProducto( $id_carritoProducto="",$cantidad_carritoProducto="",$valor_carritoProducto="",$id_carrito="",$id_producto="" ) {
         
-$this -> id_carritoProducto = $id_carritoProducto;
-$this -> cantidad_carritoProducto = $cantidad_carritoProducto;
-$this -> valor_carritoProducto = $valor_carritoProducto;
-$this -> id_carrito = $id_carrito;
-$this -> id_producto = $id_producto;
-$this -> conexion = new conexion();
-$this -> carritoProductoDAO = new carritoProductoDAO($this->id_carritoProducto,$this->cantidad_carritoProducto,$this->valor_carritoProducto,$this->id_carrito,$this->id_producto);
+        $this -> id_carritoProducto = $id_carritoProducto;
+        $this -> cantidad_carritoProducto = $cantidad_carritoProducto;
+        $this -> valor_carritoProducto = $valor_carritoProducto;
+        $this -> id_carrito = $id_carrito;
+        $this -> id_producto = $id_producto;
+        $this -> conexion = new conexion();
+        $this -> carritoProductoDAO = new carritoProductoDAO($this->id_carritoProducto,$this->cantidad_carritoProducto,$this->valor_carritoProducto,$this->id_carrito,$this->id_producto);
     }
     
     public function consultarTodos() {
@@ -74,6 +74,24 @@ $this -> carritoProductoDAO = new carritoProductoDAO($this->id_carritoProducto,$
         }
         $this -> conexion -> cerrar();
         return $valoresRetornar;
+    }
+
+    public function consultarProductosCarrito($idCarrito){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> carritoProductoDAO -> consultarProductosCarrito($idCarrito) );
+        
+        $valoresRetornar = array();
+        while( ($resultado = $this -> conexion -> extraer()) != null) {
+            array_push($valoresRetornar, new carritoProducto( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4] ));
+        }
+        $this -> conexion -> cerrar();
+        return $valoresRetornar;
+    }
+
+    public function actualizarUnidades($idCarrito, $idProducto, $cantidad, $precio, $tipoOperacion){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> carritoProductoDAO -> actualizarUnidades($idCarrito, $idProducto, $cantidad, $precio, $tipoOperacion) );
+        $this -> conexion -> cerrar();
     }
     
     public function consultarTotalFilas() {

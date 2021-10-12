@@ -73,17 +73,23 @@ private $clienteDAO;
     
     public function cliente( $id_cliente="",$nombre_cliente="",$apellido_cliente="",$direccion_cliente="",$telefono_cliente="",$fechaNacimiento_cliente="",$id_usuario="" ) {
         
-$this -> id_cliente = $id_cliente;
-$this -> nombre_cliente = $nombre_cliente;
-$this -> apellido_cliente = $apellido_cliente;
-$this -> direccion_cliente = $direccion_cliente;
-$this -> telefono_cliente = $telefono_cliente;
-$this -> fechaNacimiento_cliente = $fechaNacimiento_cliente;
-$this -> id_usuario = $id_usuario;
-$this -> conexion = new conexion();
-$this -> clienteDAO = new clienteDAO($this->id_cliente,$this->nombre_cliente,$this->apellido_cliente,$this->direccion_cliente,$this->telefono_cliente,$this->fechaNacimiento_cliente,$this->id_usuario);
+        $this -> id_cliente = $id_cliente;
+        $this -> nombre_cliente = $nombre_cliente;
+        $this -> apellido_cliente = $apellido_cliente;
+        $this -> direccion_cliente = $direccion_cliente;
+        $this -> telefono_cliente = $telefono_cliente;
+        $this -> fechaNacimiento_cliente = $fechaNacimiento_cliente;
+        $this -> id_usuario = $id_usuario;
+        $this -> conexion = new conexion();
+        $this -> clienteDAO = new clienteDAO($this->id_cliente,$this->nombre_cliente,$this->apellido_cliente,$this->direccion_cliente,$this->telefono_cliente,$this->fechaNacimiento_cliente,$this->id_usuario);
     }
     
+    public function actualizarDatos($idCliente, $nombre, $apellido, $direccion, $telefono){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> clienteDAO -> actualizarDatos($idCliente, $nombre, $apellido, $direccion, $telefono) );
+        $this -> conexion -> cerrar();
+    }
+
     public function consultarTodos() {
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> clienteDAO -> consultarTodos());

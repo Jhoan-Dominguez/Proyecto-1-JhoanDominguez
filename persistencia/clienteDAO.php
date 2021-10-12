@@ -35,6 +35,13 @@ values (
 )";
 }
 
+public function actualizarDatos($idCliente, $nombre, $apellido, $direccion, $telefono){
+    return "
+    update cliente set nombre_cliente = " .$nombre. ", apellido_cliente = " .$apellido. ",
+    direccion_cliente = " .$direccion. ", telefono_cliente = " .$telefono_cliente. "
+    where id_cliente = ".$idCliente;
+}
+
 public function consultarCliente($id_usuario) {
     return "select * from cliente where cliente.id_usuario = '".$id_usuario."';";
 }

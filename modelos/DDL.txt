@@ -72,7 +72,6 @@ CREATE TABLE compra(
     id_entrega int,
     id_tienda int,
     foreign key (id_usuario) references usuario(id_usuario),
-    foreign key (id_entrega) references entrega(id_entrega),
     foreign key (id_tienda) references tienda(id_tienda),
     primary key (id_compra)
 );

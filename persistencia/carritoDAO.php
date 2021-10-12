@@ -29,7 +29,23 @@ values (
 }
 
 public function consultarCarritos($id_usuario){
-    return "select * from carrito where carrito.id_usuario = '".$id_usuario."';";
+    return "select * from carrito where carrito.id_usuario =".$id_usuario." and carrito.estado_carrito = 1";
+}
+
+public function actualizarUnidades($idCarrito, $cantidad, $precio, $tipoOperacion){
+    if( $tipoOperacion == "Agregar"){
+        return "update carrito set numeroArticulos_carrito = numeroArticulos_carrito + " .$cantidad. ",
+        valor_carrito = valor_carrito + " . $precio . "
+        where id_carrito = ". $idCarrito ." and estado_carrito = 1";
+    }else{
+        return "update carrito set numeroArticulos_carrito = numeroArticulos_carrito - " .$cantidad. ",
+        valor_carrito = valor_carrito - " . $precio . "
+        where id_carrito = ". $idCarrito ." and estado_carrito = 1";
+    }
+}
+
+public function  actualizarEstado($idCarrito){
+    return "update carrito set estado_carrito = 0 where id_carrito = ". $idCarrito;
 }
     
 public function consultarTodos() {

@@ -76,6 +76,12 @@ private $usuarioDAO;
         return $valoresRetornar;
     }
 
+    public function actualizarDatos($idUsuario, $correo, $pass){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> usuarioDAO -> actualizarDatos($idUsuario, $correo, $pass) );
+        return $valoresRetornar;
+    }
+
     public function consultarTodos() {
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> usuarioDAO -> consultarTodos());
@@ -86,6 +92,36 @@ private $usuarioDAO;
         }
         $this -> conexion -> cerrar();
         return $valoresRetornar;
+    }
+
+    public function consultarCompraCarritos($idUsuario){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> usuarioDAO -> consultarCompraCarritos($idUsuario) );
+        
+        $valoresRetornar = array();
+        while( ($resultado = $this -> conexion -> extraer()) != null) {
+            array_push($valoresRetornar, [ $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4],
+            $resultado[5],$resultado[6],$resultado[7],$resultado[8],$resultado[9], $resultado[10],$resultado[11],
+            $resultado[12],$resultado[13], $resultado[14] ] );
+        }
+        $this -> conexion -> cerrar();
+        return $valoresRetornar;
+    }
+
+    public function consultarCompraProductos($idUsuario){
+
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> usuarioDAO -> consultarCompraProductos($idUsuario) );
+        
+        $valoresRetornar = array();
+        while( ($resultado = $this -> conexion -> extraer()) != null) {
+            array_push($valoresRetornar, [ $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4],
+            $resultado[5],$resultado[6],$resultado[7],$resultado[8],$resultado[9], $resultado[10],$resultado[11],
+            $resultado[12], $resultado[13] ] );
+        }
+        $this -> conexion -> cerrar();
+        return $valoresRetornar;
+
     }
     
     public function consultarTotalFilas() {
