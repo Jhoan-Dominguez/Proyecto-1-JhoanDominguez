@@ -73,7 +73,25 @@ public function buscarUsuario($correo, $password){
     return "select * from usuario where usuario.correo_usuario = '".$correo."' 
             and usuario.password_usuario = '".$password."' and usuario.estado_usuario = 1 ";
 }
-    
+
+public function productosMasCompradosProducto($idUsuario){
+    return "
+    select compra.id_usuario, sum(compraProducto.cantidad_compraProducto),
+    compraProducto.id_producto 
+    from compra inner join compraProducto on
+    compra.id_compra = compraProducto.id_compra where 
+    compra.id_usuario = ".intval($idUsuario)." GROUP by compraProducto.id_producto limit 0,5";
+}
+
+public function productosMasCompradosCarrito($idUsuario){
+    return "
+    select carrito.id_usuario, sum(carritoProducto.cantidad_carritoProducto), carritoProducto.id_producto
+    from carrito inner join carritoProducto on 
+    carrito.id_carrito = carritoProducto.id_carrito
+    where carrito.estado_carrito = 0 and carrito.id_usuario = ".intval($idUsuario)."
+    GROUP by carritoProducto.id_producto";
+}
+
 public function consultarTodos() {
     return "select * from usuario order by usuario.id_usuario asc ";
 }

@@ -70,6 +70,14 @@ if(isset($_POST['opcion'])){
     if($_POST['opcion'] == 'actualizarGraphicAndTableStock'){
         actualizarGraphicAndTableStock();
     }
+
+    if($_POST['opcion'] == 'drawPieChartCliente'){
+        drawPieChartCliente();
+    }
+
+    if($_POST['opcion'] == 'comprarProductoStock'){
+        comprarProductoStock();
+    }
     
 }
 
@@ -95,6 +103,75 @@ function idNuevaEntrega($direccionCliente, $valorTotal, $dateEntrega, $idDomicil
 
     $idEntrega = $entrega -> consultarTotalFilas();
     return $idEntrega;
+}
+
+function comprarProductoStock(){
+    if( isset($_SESSION['usuario']) && isset($_POST['idProducto']) && isset($_POST['cantidad']) 
+    && isset($_POST['cantidadOtro'])){
+
+        $idProducto = $_POST['idProducto'];
+        $cantidad = $_POST['cantidad'];
+        $cantidadOtro = $_POST['cantidadOtro'];
+
+        if($cantidad == 'otro'){
+            $cantidad = $cantidadOtro;
+        }
+    
+        $stock = new stock();
+        $stock = $stock -> consultarTodos();
+
+        if($stock){
+            foreach( $stock as $stock_item ){
+                if($stock_item -> getid_producto() == $idProducto){
+                    $stock_item -> comprarProductoStock($idProducto, $cantidad);
+                    echo 1;
+                }
+            }
+        }
+    
+    }
+}
+
+function drawPieChartCliente(){
+    
+    $valores = [];
+    
+    if( isset($_SESSION['usuario']) && isset($_POST['idUsuario']) ){
+        
+        $idUsuario = $_POST['idUsuario'];
+        $producto = new producto();
+        $cantidadProducto = $producto -> consultarTotalFilas();
+        $producto = $producto -> consultarTodos();
+
+        $usuario = new usuario();
+        $productosProducto = $usuario -> productosMasCompradosProducto($idUsuario);
+        $productosCarrito = $usuario -> productosMasCompradosCarrito($idUsuario);
+
+        $valores = [];
+
+        foreach($productosProducto as $productosProducto_item){
+            if( isset($valores[$productosProducto_item[2]]) ){
+                $valores[$productosProducto_item[2]] += $productosProducto_item[1];
+            }else{
+                $valores[$productosProducto_item[2]] = $productosProducto_item[1];
+            }
+        }
+
+
+        for($i = 0; $i < $cantidadProducto; $i++){
+            foreach($productosCarrito as $productosCarrito_item){
+                if( isset($valores[$productosCarrito_item[2]]) ){
+                    $valores[$productosCarrito_item[2]] += $productosCarrito_item[1];
+                }else{
+                    $valores [$productosCarrito_item[2]] = $productosCarrito_item[1];
+                }
+            }
+        }
+        $my_json_string = json_encode($valores);
+
+        echo $my_json_string;
+        
+    }
 }
 
 function idNuevaCompra( $date, $cantidad, $entregaBOOL, $valorTotal, $idUsuario, $idEntrega ){

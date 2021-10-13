@@ -125,7 +125,30 @@ private $usuarioDAO;
         }
         $this -> conexion -> cerrar();
         return $valoresRetornar;
+    }
 
+    public function productosMasCompradosProducto($idUsuario){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> usuarioDAO -> productosMasCompradosProducto($idUsuario) );
+        
+        $valoresRetornar = array();
+        while( ($resultado = $this -> conexion -> extraer()) != null) {
+            array_push($valoresRetornar, [ $resultado[0],$resultado[1],$resultado[2] ] );
+        }
+        $this -> conexion -> cerrar();
+        return $valoresRetornar;
+    }
+
+    public function productosMasCompradosCarrito($idUsuario){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> usuarioDAO -> productosMasCompradosCarrito($idUsuario) );
+        
+        $valoresRetornar = array();
+        while( ($resultado = $this -> conexion -> extraer()) != null) {
+            array_push($valoresRetornar, [ $resultado[0],$resultado[1],$resultado[2] ] );
+        }
+        $this -> conexion -> cerrar();
+        return $valoresRetornar;
     }
     
     public function consultarTotalFilas() {

@@ -34,6 +34,12 @@ return "
     where stock.id_producto = ". $id_producto ."
 ";
 }
+
+public function comprarProductoStock($idProducto, $cantidad){
+return "
+    update stock set cantidad = cantidad + ".intval($cantidad)."
+    where stock.id_producto = ". intval($idProducto);
+}
     
 public function consultarTodos() {
     return "select * from stock order by stock.id_stock asc ";

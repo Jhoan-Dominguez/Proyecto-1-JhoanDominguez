@@ -84,6 +84,12 @@ private $stockDAO;
         return $resultado;
     }
 
+    public function comprarProductoStock($idProducto, $cantidad){
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> stockDAO -> comprarProductoStock($idProducto, $cantidad) );
+        $this -> conexion -> cerrar();
+    }
+
     public function actualizarProducto($id_producto, $cantidad){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> stockDAO -> actualizarProducto($id_producto, $cantidad) );

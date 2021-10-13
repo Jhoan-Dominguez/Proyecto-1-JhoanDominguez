@@ -19,7 +19,12 @@
     $stock = new stock();
     $stock = $stock -> consultarTodos();
 
-    $valores = [0,0,0,0,0,0,0,0,0,0];
+    // grafica general
+    $valores = [];
+
+    for($i = 0; $i < count($producto); $i++ ){
+        $valores[$i] = 0;
+    }
 
     $carrito = new carrito();
     $carrito = $carrito -> consultarCarritosComprados();
@@ -30,7 +35,11 @@
             $carritoProducto = $carritoProducto -> cantidadProductosComprados( $carrito_item -> getid_carrito());
 
             foreach($carritoProducto as $carritoProducto_item){
-                $valores[ $carritoProducto_item[0] - 1 ] += $carritoProducto_item[1];
+                if($valores[ $carritoProducto_item[0] - 1 ])
+                    $valores[ $carritoProducto_item[0] - 1 ] += $carritoProducto_item[1];
+                else{
+                    $valores[ $carritoProducto_item[0] - 1 ] = $carritoProducto_item[1];
+                }
             }
         }
     }
@@ -40,9 +49,14 @@
 
     if($compraProducto){
         foreach($compraProducto as $compraProducto_item){
-            $valores[ $compraProducto_item[0] - 1 ] += $compraProducto_item[1];
+            if($valores[ $compraProducto_item[0] - 1 ])
+                $valores[ $compraProducto_item[0] - 1 ] += $compraProducto_item[1];
+            else{
+                $valores[ $compraProducto_item[0] - 1 ] = $compraProducto_item[1];
+            }
         }
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -163,7 +177,8 @@
             <h5 class="modal-title" id="exampleModalLabel">Estadisticas Producto <?php echo $producto_item -> getid_producto() ?></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" id="graficaProducto<?php echo $producto_item -> getid_producto() ?>">
+        <div class="modal-body" id="graficaProducto<?php echo $producto_item -> getid_producto() ?>" 
+        style="background: #ACACAC; height: 200px; width: 200px; padding:0;">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -242,7 +257,8 @@
             <h5 class="modal-title" id="exampleModalLabel">Estadisticas Cliente <?php echo $cliente_item -> getnombre_cliente() ?> </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body" id="grafica<?php echo $todosUsuarios_item -> getid_usuario() ?>">
+        <div class="modal-body" id="graficaCliente<?php echo $todosUsuarios_item -> getid_usuario() ?>"
+        style="background: #ACACAC; height: 200px; width: 200px; padding:0;">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -407,16 +423,18 @@
                         <td> <?php echo "$".$producto_item->getvalor_producto() ?> </td>
                         <td>
                         <select id="cantidadProductoAdd<?php echo $producto_item->getid_producto(); ?>" onchange="cantidadAdd( <?php echo $producto_item->getid_producto(); ?> )" id="cantidadProducto" style="width:60px">
-                            <option value="1"> 10 </option>
-                            <option value="2"> 20 </option>
-                            <option value="3"> 30 </option>
-                            <option value="4"> 40 </option>
+                            <option value="10"> 10 </option>
+                            <option value="20"> 20 </option>
+                            <option value="30"> 30 </option>
+                            <option value="40"> 40 </option>
                             <option value="otro">Otro</option>
                         </select>
                         <input id="cantidadProductoOtroAdd<?php echo $producto_item->getid_producto(); ?>" type="number" min="1" max="10" style="display:none">
                         </td>
-                        <td><button type="button" class="btn btn-success">Buy</button></td> 
+                        <td><button type="button" class="btn btn-success" id="comprarStock<?php echo $producto_item -> getid_producto() ?>"
+                        onclick="comprarProductoStock(<?php echo $producto_item -> getid_producto() ?>)">Buy</button></td> 
                         <td><button type="button" class="btn btn-dark" id="verGraficoProducto<?php echo $producto_item -> getid_producto() ?>"
+                        onclick="drawPieChart( <?php echo $producto_item -> getid_producto() ?> )"
                         data-bs-toggle="modal" data-bs-target="#modalGraficaProducto<?php echo $producto_item -> getid_producto() ?>">Ver Grafico</button></td>
                     </tr>
                     <?php
@@ -466,6 +484,7 @@
                         data-bs-toggle="modal" data-bs-target="#modalEditarCliente<?php echo $todosUsuarios_item -> getid_usuario() ?>" >Editar</button></td> 
                         <td><button type="button" class="btn btn-danger">Cambiar Estado</button></td> 
                         <td><button type="button" class="btn btn-dark" id="verGrafico<?php echo $todosUsuarios_item -> getid_usuario() ?>"
+                        onclick="drawPieChartCliente( <?php echo $todosUsuarios_item -> getid_usuario() ?> )"
                         data-bs-toggle="modal" data-bs-target="#modalGrafica<?php echo $todosUsuarios_item -> getid_usuario() ?>">Ver Grafico</button></td>
                         
                     </tr>
@@ -541,8 +560,8 @@
     google.charts.load('current', {'packages':['corechart', 'bar']});
     google.charts.setOnLoadCallback(drawChart);
 
+
       function drawChart() {
-        
         // grafica de barras
         let data_bar = google.visualization.arrayToDataTable([
             ['productos', 'cantidad'],
@@ -562,6 +581,59 @@
         let chart = new google.charts.Bar(document.getElementById('grafica'));
         chart.draw(data_bar, google.charts.Bar.convertOptions(options_bar));
       }
+
+    
+      function drawPieChart(idProducto){
+        let data = google.visualization.arrayToDataTable([
+            ['Producto', 'Cantidad'],
+            ['Work',     11],
+            ['Eat',      2],
+            ['Commute',  2],
+            ['Watch TV', 2],
+            ['Sleep',    7]
+            ]);
+
+            let options = {
+            title: 'My Daily Activities'
+            };
+
+            let chart = new google.visualization.PieChart(document.getElementById('graficaProducto'+idProducto));
+            chart.draw(data, options);
+        }
+
+    function drawPieChartCliente(idUsuario){
+        let array;
+        let datos  = [ ['Producto', 'Cantidad'] ];
+        
+        $.ajax({    
+            url: "funciones.php",
+            type: 'POST',
+            data: {
+                opcion: 'drawPieChartCliente',
+                idUsuario: idUsuario,
+            },
+        }).done(function(response){
+            array = JSON.parse(response);
+            console.log(array)
+            for( const index in array ){
+                datos.push([index , parseInt(array[index])])
+            }
+            console.log(datos)
+
+            let data = google.visualization.arrayToDataTable(
+                datos
+            );
+
+            let options = {
+            title: 'My Daily Activities'
+            };
+
+            let chart = new google.visualization.PieChart(document.getElementById('graficaCliente'+idUsuario));
+            chart.draw(data, options);
+        })
+    
+    }
+      
 </script>
 
 <script>
@@ -736,34 +808,27 @@ function crearFacturaProducto(idCompra, idUsuario){
     })
 }
 
-function comprarProducto( btn, idUsuario, tienda, idCliente ){
-    let idProducto = btn.value
-    let modalCarrito = document.getElementById("staticBackdrop")
-    let cantidad = document.getElementById("cantidadProducto"+idProducto).value;
-    let cantidadOtro = document.getElementById("cantidadProductoOtro"+idProducto).value;
-    let entrega = document.getElementById("entrega"+idProducto).value;
+function comprarProductoStock( idProducto ){
+
+    let cantidad = document.getElementById("cantidadProductoAdd"+idProducto).value;
+    let cantidadOtro = document.getElementById("cantidadProductoOtroAdd"+idProducto).value;
 
     $.ajax({
         url: "funciones.php",
         type: 'POST',
         data: {
-            opcion: 'comprarProducto',
+            opcion: 'comprarProductoStock',
             idProducto: idProducto ,
-            idUsuario: idUsuario,
-            tienda: tienda,
-            idCliente: idCliente,
             cantidad: cantidad,
             cantidadOtro: cantidadOtro,
-            entrega: entrega,
         }
     }).done(function(response){
 
         if(response == 1){
             alert('Compra Exitosa');
-            setTimeout(function(){ modalCarrito.modal('hide');},500);
             location.replace("index.php?");
         }else{
-            alert("Error")            
+            alert("Error"+response)            
         }
     })
 
