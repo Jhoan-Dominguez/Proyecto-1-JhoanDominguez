@@ -50,6 +50,13 @@ public function actualizarUnidades($idCarrito, $idProducto, $cantidad, $precio, 
         where carritoProducto.id_carrito = ". $idCarrito ." and carritoProducto.id_producto = ".$idProducto;
     }
 }
+
+public function cantidadProductosComprados($idCarrito){
+    return "
+    SELECT id_producto, sum(cantidad_carritoProducto) as cantidad 
+    from carritoProducto where id_carrito = ".$idCarrito." GROUP by id_producto
+    ";
+}
     
 public function consultarTodos() {
     return "select * from carritoProducto order by carritoProducto.id_producto asc ";

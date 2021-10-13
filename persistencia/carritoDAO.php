@@ -44,6 +44,12 @@ public function actualizarUnidades($idCarrito, $cantidad, $precio, $tipoOperacio
     }
 }
 
+public function consultarCarritosComprados() {
+    return "
+    select * from carrito where estado_carrito = 0 order by carrito.id_carrito asc 
+    ";
+}
+
 public function  actualizarEstado($idCarrito){
     return "update carrito set estado_carrito = 0 where id_carrito = ". $idCarrito;
 }

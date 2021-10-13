@@ -57,6 +57,20 @@ if(isset($_POST['opcion'])){
     if($_POST['opcion'] == 'actualizarEStado'){
         actualizarEStado();
     }
+
+    //funciones asociadas al administrador
+    if($_POST['opcion'] == 'crearNuevoProducto'){
+        crearNuevoProducto();
+    }
+
+    if($_POST['opcion'] == 'crearNuevoDomiciliario'){
+        crearNuevoDomiciliario();
+    }
+
+    if($_POST['opcion'] == 'actualizarGraphicAndTableStock'){
+        actualizarGraphicAndTableStock();
+    }
+    
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -132,6 +146,90 @@ function actualizarEStado(){
         $usuario -> actualizarEStado( $idUsuario, $estado);
         echo 1;
     }
+}
+
+function crearNuevoProducto(){
+    if( isset($_SESSION['usuario']) && isset($_POST['altura'])  && isset($_POST['ancho']) && isset($_POST['profundidad'])
+    && isset($_POST['caracteristicas'])  && isset($_POST['valor']) ){
+        
+        $altura = $_POST['altura'];
+        $ancho = $_POST['ancho'];
+        $profundidad = $_POST['profundidad'];
+        $caracteristicas = $_POST['caracteristicas'];
+        $valor = $_POST['valor'];
+
+        $producto = new producto(0, $altura, $ancho, $profundidad, $caracteristicas, 1, $valor, 1);
+        $producto -> crear();
+
+        echo 1;
+    }
+}
+
+function actualizarGraphicAndTableStock(){
+    if( isset($_SESSION['usuario']) ){
+        $dataDiv = '';
+
+        $stock = new stock();
+        $stock = $stock -> consultarTodos();
+
+        $dataDiv.='<div class="row">
+            <div class="col-6">
+                <div style="">
+                    <h1 style="text-align: center;">STOCK</h1>
+                    <table class="table" style="">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Disponibilidad</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Tienda</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+
+        foreach ($stock as $stock_item){
+            $dataDiv .= '<tr>
+                <th scope="row">'.$stock_item->getid_stock().'</th>
+                <td> '. $stock_item->getcantidad() .' </td>
+                <td> '. $stock_item->getdisponibilidad() .'</td>
+                <td> '. $stock_item->getid_producto().' </td>
+                <td> '. $stock_item->getid_tienda() .' </td>
+            </tr>';
+        }
+
+        $dataDiv .= '</tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="grafica" class="col-6" style="background: #ACACAC; padding:0;"></div>         
+        </div>';
+
+        echo $dataDiv;
+
+    }
+}
+
+function crearNuevoDomiciliario(){
+    if( isset($_SESSION['usuario']) && isset($_POST['nombre'])  && isset($_POST['apellido']) && isset($_POST['codigo'])
+    && isset($_POST['correo'])  && isset($_POST['password']) ){
+        
+        $nombre = $_POST['nombre'];
+        $apellido = $_POST['apellido'];
+        $codigo = $_POST['codigo'];
+        $correo = $_POST['correo'];
+        $password = $_POST['password'];
+
+        $usuario = new usuario(0,$correo, $password, 1, 2);
+        $usuario -> crear();
+        $idUsuario = $usuario -> consultarTotalFilas();
+
+        if($idUsuario){
+            $domiciliario = new domiciliario(0, $nombre, $apellido, $codigo, 1, $idUsuario);
+            $domiciliario -> crear();
+            echo 1;
+        }
+        }
 }
 
 function actualizarDatos(){
@@ -484,7 +582,6 @@ function crearCuenta(){
         
     $usuario = new usuario(0,$correo, $password, 1, 3);
     $usuario -> crear();
-    
     $idUsuario = $usuario -> consultarTotalFilas();
 
     $cliente = new cliente(0,$nombre, $apellido, $direccion, $telefono, $yearBorn, $idUsuario);

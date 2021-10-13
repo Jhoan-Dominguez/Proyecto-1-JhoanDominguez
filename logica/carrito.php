@@ -76,6 +76,18 @@ private $carritoDAO;
         return $valoresRetornar;
     }
 
+    public function consultarCarritosComprados() {
+        $this -> conexion -> abrir();
+        $this -> conexion -> ejecutar($this -> carritoDAO -> consultarCarritosComprados());
+        
+        $valoresRetornar = array();
+        while( ($resultado = $this -> conexion -> extraer()) != null) {
+            array_push($valoresRetornar, new carrito( $resultado[0],$resultado[1],$resultado[2],$resultado[3],$resultado[4]));
+        }
+        $this -> conexion -> cerrar();
+        return $valoresRetornar;
+    }
+
     public function consultarCarritos($id_usuario){
         $this -> conexion -> abrir();
         $this -> conexion -> ejecutar($this -> carritoDAO -> consultarCarritos($id_usuario));

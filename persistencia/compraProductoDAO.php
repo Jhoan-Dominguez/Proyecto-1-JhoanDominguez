@@ -25,6 +25,13 @@ values (
 " .$this -> cantidad_compraProducto. ", 
 " .$this -> valor_compraProducto. ")";
 }
+
+public function consultarCantidadProductos(){
+    return "
+    SELECT id_producto, sum(cantidad_compraProducto) as cantidad 
+    from compraProducto GROUP by id_producto;
+    ";
+}
     
 public function consultarTodos() {
     return "select * from compraProducto order by compraProducto.id_compraProducto asc ";
